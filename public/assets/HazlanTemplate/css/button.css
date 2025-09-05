@@ -1,0 +1,29 @@
+.btn-custom-primary {
+  background-color: #3498db;
+  color: white;
+  border: none;
+}
+
+.btn-custom-danger {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+}
+
+.btn-custom-warning {
+  background-color: #e7c83c;
+  color: white;
+  border: none;
+}
+
+.btn-custom-normal {
+  background-color: #049340;
+  color: white;
+  border: none;
+}
+
+.btn-custom-info {
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+}

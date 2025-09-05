@@ -1,0 +1,52 @@
+<?php
+
+namespace App\Models;
+
+use CodeIgniter\Model;
+
+class AuthGroupsUser extends Model
+{
+    protected $table            = 'auth_groups_users';
+    protected $primaryKey       = 'agu_id';
+    protected $useAutoIncrement = true;
+    protected $returnType       = 'object';
+    protected $useSoftDeletes   = true;
+    protected $protectFields    = true;
+    protected $allowedFields    = [
+        'agu_ag_id',
+        'agu_au_id',
+        'agu_created_at',
+        'agu_updated_at',
+        'agu_deleted_at'
+    ];
+
+    protected bool $allowEmptyInserts = false;
+    protected bool $updateOnlyChanged = true;
+
+    protected array $casts = [];
+    protected array $castHandlers = [];
+
+    // Dates
+    protected $useTimestamps = true;
+    protected $dateFormat    = 'datetime';
+    protected $createdField  = 'agu_created_at';
+    protected $updatedField  = 'agu_updated_at';
+    protected $deletedField  = 'agu_deleted_at';
+
+    // Validation
+    protected $validationRules      = [];
+    protected $validationMessages   = [];
+    protected $skipValidation       = false;
+    protected $cleanValidationRules = true;
+
+    // Callbacks
+    protected $allowCallbacks = true;
+    protected $beforeInsert   = [];
+    protected $afterInsert    = [];
+    protected $beforeUpdate   = [];
+    protected $afterUpdate    = [];
+    protected $beforeFind     = [];
+    protected $afterFind      = [];
+    protected $beforeDelete   = [];
+    protected $afterDelete    = [];
+}
