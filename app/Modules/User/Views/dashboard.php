@@ -860,3 +860,108 @@
         </div>
     </div>
                                 
+    <script>
+    $(document).ready(function() {
+        let csrfName = '<?= csrf_token() ?>'; // CSRF Token Name
+        let csrfHash = '<?= csrf_hash() ?>'; // CSRF Hash
+
+        function updateCsrfToken(newToken) {
+            csrfHash = newToken; // Update CSRF token
+        }
+
+        $(".mark-read").click(function() {
+            let notificationId = $(this).data("id");
+            let button = $(this);
+
+            $.ajax({
+                url: "<?= base_url('user/notification/mark-as-read'); ?>",
+                type: "POST",
+                data: {
+                    [csrfName]: csrfHash,
+                    id: notificationId
+                },
+                dataType: "json",
+                success: function(response) {
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Marked as Read',
+                            text: 'Notification has been marked as read.',
+                            timer: 1500,
+                            showConfirmButton: false
+                        }).then(() => {
+                            button.closest('.notification-item').fadeOut();
+                        });
+
+                        // Update CSRF token
+                        updateCsrfToken(response.csrf_token);
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Failed',
+                            text: response.message
+                        });
+                    }
+                },
+                error: function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Something went wrong. Please try again later.'
+                    });
+                }
+            });
+        });
+
+        $("#markAllRead").click(function() {
+            Swal.fire({
+                title: "Mark All as Read?",
+                text: "This will mark all your notifications as read.",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, Mark All"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "<?= base_url('user/notification/mark-all-read') ?>",
+                        type: "POST",
+                        data: {
+                            [csrfName]: csrfHash
+                        },
+                        dataType: "json",
+                        success: function(response) {
+                            if (response.success) {
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "Marked All as Read",
+                                    text: "All notifications have been updated.",
+                                    confirmButtonColor: "#3085d6"
+                                }).then(() => {
+                                    $(".notification-item").fadeOut();
+                                });
+
+                                // Update CSRF token
+                                updateCsrfToken(response.csrf_token);
+                            } else {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Failed",
+                                    text: response.message
+                                });
+                            }
+                        },
+                        error: function() {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error",
+                                text: "Something went wrong. Please try again."
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>
