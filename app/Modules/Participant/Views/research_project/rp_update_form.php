@@ -296,7 +296,7 @@
                 </div>
                 <div class="card-body">
 
-                    <form method="post" enctype="multipart/form-data" id="updateResearchProjectForm">
+                    <form method="POST" enctype="multipart/form-data" id="updateResearchProjectForm">
                         <?= csrf_field() ?>
 
                         <!-- Project Details Section -->

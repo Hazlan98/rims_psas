@@ -335,7 +335,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" enctype="multipart/form-data" id="judgeRegisterForm">
+                <form method="POST" enctype="multipart/form-data" id="judgeRegisterForm">
                     <?= csrf_field() ?>
                     <input name="rj_re_id" value="<?= $event_info->re_id ?>" hidden>
                     <div class="row mb-3">
@@ -382,7 +382,7 @@
                 // Send AJAX request
                 $.ajax({
                     url: "<?= base_url('judge/event/register_event_judge') ?>",
-                    type: 'post',
+                    type: 'POST',
                     data: formData,
                     dataType: 'json',
                     processData: false,

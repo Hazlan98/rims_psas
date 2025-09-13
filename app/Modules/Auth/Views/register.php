@@ -57,7 +57,7 @@
       </div>
       <div class="card-body register-card-body">
         <p class="register-box-msg">Register a new membership</p>
-        <form action="<?= base_url('auth/attempt_register') ?>" method="post">
+        <form action="<?= base_url('auth/attempt_register') ?>" method="POST">
           <div class="input-group mb-1">
             <div class="form-floating">
               <input id="registerFullName" type="text" name="registerFullName" class="form-control" placeholder="" />

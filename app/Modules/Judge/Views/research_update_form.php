@@ -21,7 +21,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <form action="<?= base_url('participant/submit-research-paper') ?>" method="post" enctype="multipart/form-data" id="newResearchForm">
+                        <form action="<?= base_url('participant/submit-research-paper') ?>" method="POST" enctype="multipart/form-data" id="newResearchForm">
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="projectTitle" class="form-label">Project Title</label>

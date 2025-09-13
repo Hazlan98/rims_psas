@@ -331,7 +331,7 @@
   </center>
 
   <div class="cont">
-    <form action="<?= base_url('auth/attempt_login') ?>" method="post">
+    <form action="<?= base_url('auth/attempt_login') ?>" method="POST">
 
       <div class="form sign-in">
         <h2>Welcome back,</h2>
@@ -364,7 +364,7 @@
           <span class="m--in">Sign In</span>
         </div>
       </div>
-      <form action="<?= base_url('auth/attempt_register') ?>" method="post">
+      <form action="<?= base_url('auth/attempt_register') ?>" method="POST">
 
         <div class="form sign-up">
           <h2>Time to feel like home,</h2>

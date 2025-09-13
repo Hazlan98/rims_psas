@@ -1,231 +1,161 @@
+<!-- Hazlan Custom Template -->
+<link rel="stylesheet" href="<?= base_url('assets/HazlanTemplate/css/card.css'); ?>">
+<link rel="stylesheet" href="<?= base_url('assets/HazlanTemplate/css/event.css'); ?>">
+<link rel="stylesheet" href="<?= base_url('assets/HazlanTemplate/css/table.css'); ?>">
+<link rel="stylesheet" href="<?= base_url('assets/HazlanTemplate/css/select2.css'); ?>">
+<link rel="stylesheet" href="<?= base_url('assets/HazlanTemplate/css/modal.css'); ?>">
+<link rel="stylesheet" href="<?= base_url('assets/HazlanTemplate/css/button.css'); ?>">
+
 <!-- jQuery (required for Select2 and dynamic elements) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<!-- Bootstrap 5 CSS and JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <!-- Select2 (for dropdown) -->
-<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
+<!-- DataTables CSS and JS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+
 <!-- SweetAlert2 CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-
-<!-- SweetAlert2 JS -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-<style>
-    /* Override the Select2 container */
-    .select2-container {
-        width: 100% !important;
-    }
-
-    /* Override the Select2 input */
-    .select2-container .select2-selection--single {
-        height: calc(2.25rem + 2px) !important;
-        /* Match Bootstrap's input height */
-        padding: 0.375rem 0.75rem !important;
-        /* Match Bootstrap's padding */
-        font-size: 1rem !important;
-        /* Match Bootstrap's font size */
-        line-height: 1.5 !important;
-        /* Match Bootstrap's line height */
-        border-radius: 0.375rem !important;
-        /* Match Bootstrap's border radius */
-        border: 1px solid #ced4da !important;
-        /* Match Bootstrap's border color */
-        background-color: #fff !important;
-        /* Match Bootstrap's background color */
-    }
-
-    /* Override Select2 dropdown */
-    .select2-container .select2-dropdown {
-        border-radius: 0.375rem !important;
-        /* Match Bootstrap's border radius */
-        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
-        /* Match Bootstrap's shadow */
-        border: 1px solid #ced4da !important;
-        /* Match Bootstrap's border color */
-    }
-
-    /* Override Select2 search box */
-    .select2-container .select2-search--dropdown .select2-search__field {
-        padding: 0.375rem 0.75rem !important;
-        /* Match Bootstrap's input padding */
-        font-size: 1rem !important;
-        /* Match Bootstrap's font size */
-    }
-
-    /* Option styling for Select2 */
-    .select2-container .select2-results__option {
-        padding: 0.375rem 0.75rem !important;
-        /* Match Bootstrap's padding */
-        font-size: 1rem !important;
-        /* Match Bootstrap's font size */
-    }
-
-    /* Hover effect for options */
-    .select2-container .select2-results__option--highlighted {
-        background-color: rgb(168, 211, 255) !important;
-        /* Match Bootstrap's hover background */
-    }
-</style>
-
-<div class="content p-3">
-    <div class="container-fluid">
-        <div class="row">
-            <!-- /.col-md-6 -->
-            <div class="col-lg-12">
-                <div class="info-box">
-                    <span class="info-box-icon bg-info">
-                        <img src="<?= base_url('uploads/events/' . $research_events->re_banner_image) ?>" alt="Icon" style="width: 100%; height: 100%; object-fit: cover; border-radius: 5px;">
-                    </span>
-
-                    <div class="info-box-content">
-                        <h5><b><?= $research_events->re_name ?></b></h5>
-                        <div class="d-flex gap-3 flex-wrap">
-                            <span class="info-box-text"><strong>Contact:</strong> <?= $research_events->re_contact_email ?></span>
-                            <span class="info-box-text"><strong>Location:</strong> <?= $research_events->re_location ?></span>
-                        </div>
-                        <span class="info-box-number"><?= $research_events->re_description ?></span>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-lg-12 mt-3">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="info-box text-bg-success">
-                            <span class="info-box-icon"> <i class="bi bi-tag-fill"></i> </span>
-                            <div class="info-box-content">
-                                <span class="info-box-text">Start Date</span>
-                                <span class="info-box-number"><?= date("d M Y", strtotime($research_events->re_start_date)) ?></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="info-box text-bg-danger">
-                            <span class="info-box-icon"> <i class="bi bi-tag-fill"></i> </span>
-                            <div class="info-box-content">
-                                <span class="info-box-text">Registration Deadline</span>
-                                <span class="info-box-number"><?= date("d M Y", strtotime($research_events->re_registration_deadline)) ?></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="info-box text-bg-warning">
-                            <span class="info-box-icon"> <i class="bi bi-tag-fill"></i> </span>
-                            <div class="info-box-content">
-                                <span class="info-box-text">End Date</span>
-                                <span class="info-box-number"><?= date("d M Y", strtotime($research_events->re_end_date)) ?></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="info-box text-bg-primary">
-                            <span class="info-box-icon"> <i class="bi bi-tag-fill"></i> </span>
-                            <div class="info-box-content">
-                                <span class="info-box-text">Participant</span>
-                                <span class="info-box-number"><?= $research_participant_count ?>/<?= $research_events->re_max_participants ?></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-12 pt-3">
-
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h3 class="card-title mb-0">Your Registered Paper</h3>
-                        <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#newResearchModal">
-                            Register Form
-                        </button>
-                    </div>
-
-                    <div class="card-body">
-                        <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="dt-buttons btn-group flex-wrap">
-                                        <button class="btn btn-secondary">Copy</button>
-                                        <button class="btn btn-secondary">CSV</button>
-                                        <button class="btn btn-secondary">Excel</button>
-                                        <button class="btn btn-secondary">PDF</button>
-                                        <button class="btn btn-secondary">Print</button>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 d-flex justify-content-end">
-                                    <div class="dataTables_paginate paging_simple_numbers">
-                                        <ul class="pagination mb-0">
-                                            <li class="paginate_button page-item previous disabled"><a href="#" class="page-link">Previous</a></li>
-                                            <li class="paginate_button page-item active"><a href="#" class="page-link">1</a></li>
-                                            <li class="paginate_button page-item"><a href="#" class="page-link">2</a></li>
-                                            <li class="paginate_button page-item"><a href="#" class="page-link">3</a></li>
-                                            <li class="paginate_button page-item next"><a href="#" class="page-link">Next</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row mt-3">
-                                <div class="col-sm-12">
-                                    <table id="example1" class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>No.</th>
-                                                <th>Category</th>
-                                                <th>Title</th>
-                                                <th>Abstract</th>
-                                                <th>Payment</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php $counter = 1;
-                                            foreach ($research_papers as $paper): ?>
-                                                <tr>
-                                                    <td><?= $counter++; ?></td>
-                                                    <td><?= get_field_desc($paper->rpi_rf_id); ?></td>
-                                                    <td><?= $paper->rpi_title ?></td>
-                                                    <td><a href="<?= base_url($paper->rpi_abstract) ?>" target="_blank" class="btn btn-info btn-sm">Abstract</td>
-                                                    <td>
-                                                        <?php if (!empty($paper->rpi_proof_of_payment)): ?>
-                                                            <a href="<?= base_url($paper->rpi_proof_of_payment) ?>" target="_blank" class="btn btn-info btn-sm">Payment</a>
-                                                        <?php endif; ?>
-                                                    </td>
-                                                    <td><?= get_rims_participant_status($paper->rpi_status) ?></td>
-                                                    <td>
-                                                        <div class="btn-group">
-                                                            <a href="<?= base_url('participant/research_project/get_rp_details/') . $paper->rpi_id ?>" class="btn btn-info btn-sm view-btn">
-                                                                <i class="fas fa-eye"></i>
-                                                            </a>
-                                                            <?php if ($paper->rpi_submitted_at == null): ?>
-                                                                <a href="<?= base_url('participant/research_project/get-rpi-update-form/') . $paper->rpi_id ?>" class="btn btn-warning btn-sm update-btn">
-                                                                    <i class="fas fa-edit"></i>
-                                                                </a>
-                                                            <?php endif; ?>
-                                                            <?php if ($paper->rpi_status == 'Draft'): ?>
-                                                                <button data-id="<?= $paper->rpi_id; ?>" class="btn btn-danger btn-sm delete-btn">
-                                                                    <i class="fas fa-trash"></i>
-                                                                </button>
-                                                            <?php endif; ?>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            <?php endforeach ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- /.col-md-6 -->
+<div class="container py-4">
+    <!-- Event Header -->
+    <div class="event-header">
+        <div class="event-banner">
+            <img src="<?= base_url('uploads/events/') . $research_events->re_banner_image ?>" alt="Event Banner">
         </div>
-        <!-- /.row -->
-    </div><!-- /.container-fluid -->
+        <div class="event-details">
+            <h1 class="event-name"><?= $research_events->re_name ?></h1>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fas fa-envelope-open text-primary me-2"></i>
+                        <span><strong>Contact:</strong> <?= $research_events->re_contact_email ?></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fas fa-map-marker-alt text-danger me-2"></i>
+                        <span><strong>Location:</strong> <?= $research_events->re_location ?></span>
+                    </div>
+                </div>
+            </div>
+            <p class="text-muted"><?= $research_events->re_description ?></p>
+        </div>
+    </div>
+
+    <!-- Event Metrics -->
+    <div class="row mb-4">
+        <div class="col-md-3 mb-3">
+            <div class="info-card bg-success bg-opacity-10 text-success">
+                <div class="info-card-icon">
+                    <i class="fas fa-calendar-day"></i>
+                </div>
+                <div class="info-card-title">Start Date</div>
+                <div class="info-card-value"><?= date("d M Y", strtotime($research_events->re_start_date)) ?></div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="info-card bg-danger bg-opacity-10 text-danger">
+                <div class="info-card-icon">
+                    <i class="fas fa-hourglass-end"></i>
+                </div>
+                <div class="info-card-title">Registration Deadline</div>
+                <div class="info-card-value"><?= date("d M Y", strtotime($research_events->re_registration_deadline)) ?></div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="info-card bg-warning bg-opacity-10 text-warning">
+                <div class="info-card-icon">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <div class="info-card-title">End Date</div>
+                <div class="info-card-value"><?= date("d M Y", strtotime($research_events->re_end_date)) ?></div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="info-card bg-primary bg-opacity-10 text-primary">
+                <div class="info-card-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="info-card-title">Participants</div>
+                <div class="info-card-value">0/<?= $research_events->re_max_participants ?></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="row">
+        <div class="col-lg-12 mb-4">
+            <div class="content-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5>
+                        <i class="fas fa-user-check me-2 text-primary"></i>
+                        Registered Participants
+                    </h5>
+                    <button type="button" class="btn btn-primary btn-custom-primary ms-auto" data-bs-toggle="modal" data-bs-target="#newResearchModal">
+                        <i class="fas fa-plus me-1"></i>Register Form
+                    </button>
+                </div>
+                <div class="card-body p-2">
+                    <div class="table-responsive">
+                        <table id="participantTable" class="table table-hover table-custom">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Category</th>
+                                    <th>Title</th>
+                                    <th>Abstract</th>
+                                    <th>Payment</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $counter = 1;
+                                foreach ($research_papers as $paper): ?>
+                                    <tr>
+                                        <td><?= $counter++; ?></td>
+                                        <td><?= get_field_desc($paper->rpi_rf_id); ?></td>
+                                        <td><?= $paper->rpi_title ?></td>
+                                        <td><a href="<?= base_url($paper->rpi_abstract) ?>" target="_blank" class="btn btn-info btn-sm">Abstract</td>
+                                        <td>
+                                            <?php if (!empty($paper->rpi_proof_of_payment)): ?>
+                                                <a href="<?= base_url($paper->rpi_proof_of_payment) ?>" target="_blank" class="btn btn-info btn-sm">Payment</a>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td><?= get_rims_participant_status($paper->rpi_status) ?></td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a href="<?= base_url('participant/research_project/get_rp_details/') . $paper->rpi_id ?>" class="btn btn-info btn-sm view-btn">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <?php if ($paper->rpi_submitted_at == null || $paper->rpi_status == 'returned'): ?>
+                                                    <a href="<?= base_url('participant/research_project/get-rp-update-form/') . $paper->rpi_id ?>" class="btn btn-warning btn-sm update-btn">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                <?php endif; ?>
+                                                <?php if ($paper->rpi_status == 'Draft'): ?>
+                                                    <button data-id="<?= $paper->rpi_id; ?>" class="btn btn-danger btn-sm delete-btn">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                <?php endif; ?>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php endforeach ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- New Registration Modal -->
@@ -233,12 +163,16 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="newResearchModalLabel">Submit New Research Paper</h5>
+                <h5 class="modal-title" id="newResearchModalLabel">
+                    <i class="fas fa-plus-circle me-2"></i>
+                    Submit New Research Paper
+                </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <!-- Form Inside Modal -->
-                <form action="<?= base_url('participant/research/submit-research-paper') ?>" method="post" enctype="multipart/form-data" id="newRegistrationForm">
+                <form action="<?= base_url('participant/research/submit-research-paper') ?>" method="POST" enctype="multipart/form-data" id="newRegistrationForm">
+                    <?= csrf_field() ?>
 
                     <input type="text" class="form-control" id="rp_event_id" name="rp_event_id" value="<?= $rp_event_id ?>" hidden>
 
@@ -271,7 +205,8 @@
                                 <button type="button" class="btn btn-danger remove-member" style="display:none;">Remove</button>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-success" id="addMember">Add Another</button>
+                        <button type="button" class="btn btn-custom-normal" id="addMember">
+                            <i class="fas fa-user-plus"></i>Add Another</button>
                     </div>
 
                     <!-- New Selection Input -->
@@ -282,24 +217,19 @@
                         </select>
                     </div>
 
-                    <!-- Admin Bank Details -->
-                    <!-- <div class="mb-3 p-3 border rounded bg-light">
-                        <h5 class="mb-2">Admin Bank Details</h5>
-                        <p><strong>Account Name:</strong> ABC Research Conference</p>
-                        <p><strong>Bank Name:</strong> XYZ Bank</p>
-                        <p><strong>Account Number:</strong> 123-456-789</p>
-                    </div> -->
-
-                    <!-- Proof of Payment Upload -->
-                    <!-- <div class="mb-3">
-                        <label for="proofOfPayment" class="form-label">Upload Proof of Payment (PDF/Image)</label>
-                        <input type="file" class="form-control" id="proofOfPayment" name="proofOfPayment" accept=".pdf, .jpg, .jpeg, .png" required>
-                    </div> -->
-
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-warning" id="saveDraft">Save</button>
-                        <button type="submit" class="btn btn-primary">Submit Paper</button>
+                        <button type="button" class="btn btn-custom-danger" data-bs-dismiss="modal">
+                            <i class="fas fa-times me-1"></i> Close
+                        </button>
+
+                        <button type="button" class="btn btn-custom-warning" id="saveDraft">
+                            <i class="fas fa-file-alt me-1"></i> Save Draft
+                        </button>
+
+                        <button type="submit" class="btn btn-custom-primary">
+                            <i class="fas fa-paper-plane me-1"></i> Submit
+                        </button>
+
                     </div>
                 </form>
             </div>
@@ -309,6 +239,51 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
+<!-- Helper function for status color -->
+<script>
+    // Initialize DataTables and Select2
+    $(document).ready(function() {
+        // Initialize participant table with DataTables
+        $('#participantTable').DataTable({
+            responsive: true,
+            language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Search participations...",
+                lengthMenu: "Show _MENU_ entries",
+                info: "Showing _START_ to _END_ of _TOTAL_ participations",
+                infoEmpty: "Showing 0 to 0 of 0 participations",
+                infoFiltered: "(filtered from _MAX_ total participations)",
+                zeroRecords: "No matching participations found",
+                paginate: {
+                    first: '<i class="fas fa-angle-double-left"></i>',
+                    previous: '<i class="fas fa-angle-left"></i>',
+                    next: '<i class="fas fa-angle-right"></i>',
+                    last: '<i class="fas fa-angle-double-right"></i>'
+                }
+            },
+            dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            order: [
+                [0, 'asc']
+            ], // Default sort by the first column
+            // Only add pagination if there are enough entries
+            paging: <?= (count($research_papers) > 10) ? 'true' : 'false' ?>,
+            pageLength: 10,
+            lengthMenu: [
+                [5, 10, 25, 50, -1],
+                [5, 10, 25, 50, "All"]
+            ]
+        });
+
+        // Initialize Select2
+        $('.select2').select2({
+            width: '100%',
+            dropdownParent: $('#newResearchModal')
+        });
+    });
+</script>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -347,9 +322,9 @@
             let newMember = `
             <div class="input-group mb-2 team-member">
                 <input type="text" class="form-control" name="teamMembers[]" placeholder="Enter team member name" required>
-                <button type="button" class="btn btn-danger remove-member">Remove</button>
+                <button type="button" class="btn btn-danger remove-member"><i class="fas fa-user-minus"></i></button>
             </div>
-        `;
+            `;
             $("#teamContainer").append(newMember);
             updateTeamLeaderOptions();
         });
@@ -479,6 +454,8 @@
 <script>
     //Remove event Field
     $(document).on('click', '.delete-btn', function() {
+        let csrfName = '<?= csrf_token() ?>';
+        let csrfHash = '<?= csrf_hash() ?>';
         let id = $(this).data('id');
 
         Swal.fire({
@@ -494,6 +471,10 @@
                 $.ajax({
                     url: "<?= base_url('participant/event/delete_draft_participation/') ?>" + id,
                     type: "DELETE",
+                    data: {
+                        id: id,
+                        [csrfName]: csrfHash,
+                    },
                     success: function(response) {
                         Swal.fire("Deleted!", response.message, "success");
                         location.reload();

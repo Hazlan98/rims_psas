@@ -196,116 +196,207 @@ class ParticipantEventController extends BaseController
         return $this->response->setStatusCode(200)->setJSON(['message' => 'Research paper saved as draft!']);
     }
 
+    // public function submitParticipationForm()
+    // {
+    //     // get user id
+    //     $user_id = $this->session->get('user_id');
+    //     // if ($this->request->getMethod() === 'POST') {
+    //     $validationRules = [
+    //         'projectTitle'      => 'required',
+    //         'projectField'      => 'required',
+    //         'paperFile'         => 'uploaded[paperFile]|max_size[paperFile,2048]|ext_in[paperFile,pdf]',
+    //         'teamMembers'       => 'required',
+    //         'teamLeader'        => 'required',
+    //     ];
+
+    //     if (!$this->validate($validationRules)) {
+    //         return $this->response->setStatusCode(400)->setBody(json_encode($this->validator->getErrors()));
+    //     }
+
+    //     // Save uploaded file
+    //     $file = $this->request->getFile('paperFile');
+    //     if ($file->isValid() && !$file->hasMoved()) {
+    //         $year = date('Y'); // Get current year
+    //         $uploadPath = FCPATH . 'uploads/abstract/' . $year;
+
+    //         // Create the folder if it doesn't exist
+    //         if (!is_dir($uploadPath)) {
+    //             mkdir($uploadPath, 0777, true);
+    //         }
+
+    //         $newFileName = $file->getRandomName();
+    //         $file->move($uploadPath, $newFileName);
+
+    //         // Store path relative to base URL
+    //         $abstract_attachment = 'uploads/abstract/' . $year . '/' . $newFileName;
+    //     }
+
+    //     // Save uploaded pop file
+    //     // $popFile = $this->request->getFile('proofOfPayment');
+    //     // if ($popFile->isValid() && !$popFile->hasMoved()) {
+    //     //     $year = date('Y'); // Get current year
+    //     //     $uploadPath = FCPATH . 'uploads/payment/' . $year;
+
+    //     //     // Create the folder if it doesn't exist
+    //     //     if (!is_dir($uploadPath)) {
+    //     //         mkdir($uploadPath, 0777, true);
+    //     //     }
+
+    //     //     $newPopFileName = $popFile->getRandomName();
+    //     //     $popFile->move($uploadPath, $newPopFileName);
+
+    //     //     // Store path relative to base URL
+    //     //     $pop_attachment = 'uploads/payment/' . $year . '/' . $newPopFileName;
+    //     // }
+
+    //     // Store data in the database (modify this to fit your database structure)
+    //     $rpi_data = [
+    //         'rpi_owner_id'          => $user_id,
+    //         'rpi_title'             => $this->request->getPost('projectTitle'),
+    //         'rpi_abstract'          => $abstract_attachment ?? '',
+    //         // 'rpi_proof_of_payment'  => $pop_attachment ?? '',
+    //         'rpi_rf_id'             => $this->request->getPost('projectField'),
+    //         'rpi_re_id'             => $this->request->getPost('rp_event_id'),
+    //         'rpi_status'            => 'Submit',
+    //         'rpi_submitted_at'      => date('Y-m-d H:i:s')
+
+    //     ];
+
+    //     // Insert rpi information into the database
+    //     $this->rims_paper_info->insert($rpi_data);
+    //     $rpi_id = $this->rims_paper_info->insertID();
+
+    //     if ($rpi_id) {
+    //         // Get team members and presenter
+    //         $team_members   = $this->request->getPost('teamMembers');
+    //         $team_presenter = $this->request->getPost('teamLeader');
+
+    //         foreach ($team_members as $member) {
+    //             $team_data = [
+    //                 'rrt_rpi_id' => $rpi_id,
+    //                 'rrt_name'   => $member,
+    //                 'rrt_role'   => ($member == $team_presenter) ? 'presenter' : 'member'
+    //             ];
+
+    //             // Insert team member into database
+    //             $this->rims_research_team->insert($team_data);
+    //         }
+
+    //         // Fetch all admin
+    //         $admin_and_payment_admin_lists = $this->auth_groups_user
+    //             ->select('agu_au_id')
+    //             ->where('agu_ag_id', 1)
+    //             // ->orWhere('agu_ag_id', 3)
+    //             ->findAll();
+
+    //         foreach ($admin_and_payment_admin_lists as $admin) {
+    //             // Give Admin Notification
+    //             $notification_data = [
+    //                 'rn_au_id'       => $admin->agu_au_id, // Use array notation if `findAll()` returns an array
+    //                 'rn_title'       => 'Participant: Participation Submission',
+    //                 'rn_description' => 'New Submission Has been Made.'
+    //             ];
+
+    //             $this->rims_notification->insert($notification_data);
+    //         }
+    //     }
+
+    //     return $this->response->setStatusCode(200)->setJSON(['message' => 'Research paper submitted successfully!']);
+    //     // }
+
+    //     // return $this->response->setStatusCode(405)->setBody("Method Not Allowed");
+    // }
+
     public function submitParticipationForm()
-    {
-        // get user id
-        $user_id = $this->session->get('user_id');
-        // if ($this->request->getMethod() === 'post') {
-        $validationRules = [
-            'projectTitle'      => 'required',
-            'projectField'      => 'required',
-            'paperFile'         => 'uploaded[paperFile]|max_size[paperFile,2048]|ext_in[paperFile,pdf]',
-            'teamMembers'       => 'required',
-            'teamLeader'        => 'required',
-        ];
+{
+    $user_id = $this->session->get('user_id');
 
-        if (!$this->validate($validationRules)) {
-            return $this->response->setStatusCode(400)->setBody(json_encode($this->validator->getErrors()));
-        }
+    $validationRules = [
+        'projectTitle' => 'required',
+        'projectField' => 'required',
+        'paperFile'    => 'uploaded[paperFile]|max_size[paperFile,2048]|ext_in[paperFile,pdf]',
+        'teamMembers'  => 'required',
+        'teamLeader'   => 'required',
+    ];
 
-        // Save uploaded file
-        $file = $this->request->getFile('paperFile');
-        if ($file->isValid() && !$file->hasMoved()) {
-            $year = date('Y'); // Get current year
-            $uploadPath = FCPATH . 'uploads/abstract/' . $year;
-
-            // Create the folder if it doesn't exist
-            if (!is_dir($uploadPath)) {
-                mkdir($uploadPath, 0777, true);
-            }
-
-            $newFileName = $file->getRandomName();
-            $file->move($uploadPath, $newFileName);
-
-            // Store path relative to base URL
-            $abstract_attachment = 'uploads/abstract/' . $year . '/' . $newFileName;
-        }
-
-        // Save uploaded pop file
-        // $popFile = $this->request->getFile('proofOfPayment');
-        // if ($popFile->isValid() && !$popFile->hasMoved()) {
-        //     $year = date('Y'); // Get current year
-        //     $uploadPath = FCPATH . 'uploads/payment/' . $year;
-
-        //     // Create the folder if it doesn't exist
-        //     if (!is_dir($uploadPath)) {
-        //         mkdir($uploadPath, 0777, true);
-        //     }
-
-        //     $newPopFileName = $popFile->getRandomName();
-        //     $popFile->move($uploadPath, $newPopFileName);
-
-        //     // Store path relative to base URL
-        //     $pop_attachment = 'uploads/payment/' . $year . '/' . $newPopFileName;
-        // }
-
-        // Store data in the database (modify this to fit your database structure)
-        $rpi_data = [
-            'rpi_owner_id'          => $user_id,
-            'rpi_title'             => $this->request->getPost('projectTitle'),
-            'rpi_abstract'          => $abstract_attachment ?? '',
-            // 'rpi_proof_of_payment'  => $pop_attachment ?? '',
-            'rpi_rf_id'             => $this->request->getPost('projectField'),
-            'rpi_re_id'             => $this->request->getPost('rp_event_id'),
-            'rpi_status'            => 'Submit',
-            'rpi_submitted_at'      => date('Y-m-d H:i:s')
-
-        ];
-
-        // Insert rpi information into the database
-        $this->rims_paper_info->insert($rpi_data);
-        $rpi_id = $this->rims_paper_info->insertID();
-
-        if ($rpi_id) {
-            // Get team members and presenter
-            $team_members   = $this->request->getPost('teamMembers');
-            $team_presenter = $this->request->getPost('teamLeader');
-
-            foreach ($team_members as $member) {
-                $team_data = [
-                    'rrt_rpi_id' => $rpi_id,
-                    'rrt_name'   => $member,
-                    'rrt_role'   => ($member == $team_presenter) ? 'presenter' : 'member'
-                ];
-
-                // Insert team member into database
-                $this->rims_research_team->insert($team_data);
-            }
-
-            // Fetch all admin
-            $admin_and_payment_admin_lists = $this->auth_groups_user
-                ->select('agu_au_id')
-                ->where('agu_ag_id', 1)
-                // ->orWhere('agu_ag_id', 3)
-                ->findAll();
-
-            foreach ($admin_and_payment_admin_lists as $admin) {
-                // Give Admin Notification
-                $notification_data = [
-                    'rn_au_id'       => $admin->agu_au_id, // Use array notation if `findAll()` returns an array
-                    'rn_title'       => 'Participant: Participation Submission',
-                    'rn_description' => 'New Submission Has been Made.'
-                ];
-
-                $this->rims_notification->insert($notification_data);
-            }
-        }
-
-        return $this->response->setStatusCode(200)->setJSON(['message' => 'Research paper submitted successfully!']);
-        // }
-
-        // return $this->response->setStatusCode(405)->setBody("Method Not Allowed");
+    if (!$this->validate($validationRules)) {
+        return $this->response
+            ->setStatusCode(400)
+            ->setJSON([
+                'status'   => 'error',
+                'message'  => $this->validator->getErrors(),
+                'csrfHash' => csrf_hash() // 🔄 always refresh CSRF
+            ]);
     }
+
+    $abstract_attachment = null;
+
+    // Save uploaded file
+    $file = $this->request->getFile('paperFile');
+    if ($file && $file->isValid() && !$file->hasMoved()) {
+        $year = date('Y');
+        $uploadPath = FCPATH . 'uploads/abstract/' . $year;
+
+        if (!is_dir($uploadPath)) {
+            mkdir($uploadPath, 0777, true);
+        }
+
+        $newFileName = $file->getRandomName();
+        $file->move($uploadPath, $newFileName);
+
+        $abstract_attachment = 'uploads/abstract/' . $year . '/' . $newFileName;
+    }
+
+    $rpi_data = [
+        'rpi_owner_id'     => $user_id,
+        'rpi_title'        => $this->request->getPost('projectTitle'),
+        'rpi_abstract'     => $abstract_attachment ?? '',
+        'rpi_rf_id'        => $this->request->getPost('projectField'),
+        'rpi_re_id'        => $this->request->getPost('rp_event_id'),
+        'rpi_status'       => 'Submit',
+        'rpi_submitted_at' => date('Y-m-d H:i:s'),
+    ];
+
+    $this->rims_paper_info->insert($rpi_data);
+    $rpi_id = $this->rims_paper_info->insertID();
+
+    if ($rpi_id) {
+        $team_members   = $this->request->getPost('teamMembers');
+        $team_presenter = $this->request->getPost('teamLeader');
+
+        foreach ($team_members as $member) {
+            $team_data = [
+                'rrt_rpi_id' => $rpi_id,
+                'rrt_name'   => $member,
+                'rrt_role'   => ($member == $team_presenter) ? 'presenter' : 'member'
+            ];
+
+            $this->rims_research_team->insert($team_data);
+        }
+
+        $admin_and_payment_admin_lists = $this->auth_groups_user
+            ->select('agu_au_id')
+            ->where('agu_ag_id', 1)
+            ->findAll();
+
+        foreach ($admin_and_payment_admin_lists as $admin) {
+            $notification_data = [
+                'rn_au_id'       => $admin->agu_au_id,
+                'rn_title'       => 'Participant: Participation Submission',
+                'rn_description' => 'New Submission Has been Made.'
+            ];
+
+            $this->rims_notification->insert($notification_data);
+        }
+    }
+
+    return $this->response->setStatusCode(200)->setJSON([
+        'status'   => 'success',
+        'message'  => 'Research paper submitted successfully!',
+        'csrfHash' => csrf_hash() // 🔄 always return new CSRF
+    ]);
+}
+
 
     public function activeEventList()
     {

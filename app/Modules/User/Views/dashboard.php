@@ -1,441 +1,746 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Notifications & Events</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4338ca;
+            --primary-light: #8b5cf6;
+            --accent: #06b6d4;
+            --accent-pink: #ec4899;
+            --text-dark: #0f172a;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --error: #ef4444;
+            --warning: #f59e0b;
+            --surface: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --vh: 1vh;
+        }
 
-<style>
-    :root {
-        --primary-color: #3f51b5;
-        --primary-light: #757de8;
-        --primary-dark: #002984;
-        --accent-color: #ff4081;
-        --warning-color: #ff9800;
-        --success-color: #4caf50;
-        --danger-color: #f44336;
-        --gray-100: #f8f9fa;
-        --gray-200: #e9ecef;
-        --gray-300: #dee2e6;
-        --gray-400: #ced4da;
-        --gray-500: #adb5bd;
-        --gray-600: #6c757d;
-        --gray-700: #495057;
-        --gray-800: #343a40;
-        --gray-900: #212529;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-        margin: 0;
-        font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 1.5;
-        color: var(--gray-800);
-        text-align: left;
-        background-color: var(--gray-100);
-    }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            color: var(--text-dark);
+        }
 
-    /* Card Styles */
-    .card {
-        border: none;
-        border-radius: 12px;
-        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
-        transition: all 0.3s;
-        overflow: hidden;
-        margin-bottom: 24px;
-    }
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
 
-    .card:hover {
-        box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
-    }
+        /* Particles background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
 
-    .card-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 16px 20px;
-        border-bottom: 1px solid var(--gray-200);
-        background-color: white;
-    }
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 8s infinite ease-in-out;
+        }
 
-    .card-title {
-        display: flex;
-        align-items: center;
-        font-weight: 600;
-        font-size: 1.1rem;
-        margin: 0;
-        color: var(--gray-800);
-    }
+        .particle:nth-child(odd) { animation-direction: reverse; }
 
-    .card-title i {
-        margin-right: 8px;
-        color: var(--primary-color);
-    }
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10%, 90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
 
-    .card-header-actions {
-        display: flex;
-        gap: 8px;
-    }
+        .particle:nth-child(1) { width: 8px; height: 8px; left: 10%; animation-delay: 0s; animation-duration: 6s; }
+        .particle:nth-child(2) { width: 12px; height: 12px; left: 20%; animation-delay: 1s; animation-duration: 8s; }
+        .particle:nth-child(3) { width: 6px; height: 6px; left: 30%; animation-delay: 2s; animation-duration: 7s; }
+        .particle:nth-child(4) { width: 10px; height: 10px; left: 40%; animation-delay: 3s; animation-duration: 9s; }
+        .particle:nth-child(5) { width: 14px; height: 14px; left: 50%; animation-delay: 4s; animation-duration: 6s; }
+        .particle:nth-child(6) { width: 10px; height: 10px; left: 60%; animation-delay: 2.5s; animation-duration: 7s; }
+        .particle:nth-child(7) { width: 8px; height: 8px; left: 70%; animation-delay: 4s; animation-duration: 9s; }
+        .particle:nth-child(8) { width: 6px; height: 6px; left: 80%; animation-delay: 1.5s; animation-duration: 6s; }
+        .particle:nth-child(9) { width: 12px; height: 12px; left: 90%; animation-delay: 3.5s; animation-duration: 8s; }
 
-    /* Notification Styles */
-    .notification-list {
-        padding: 0;
-    }
+        .content {
+            padding: 30px;
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+        }
 
-    .notification-item {
-        display: flex;
-        padding: 16px 20px;
-        border-bottom: 1px solid var(--gray-200);
-        transition: all 0.2s;
-    }
+        .container-fluid {
+            /* max-width: 1400px; */
+            margin: 0 auto;
+        }
 
-    .notification-item:hover {
-        background-color: rgba(63, 81, 181, 0.04);
-    }
+        .row {
+            /* display: grid; */
+            /* grid-template-columns: 1fr 1fr; */
+            /* gap: 30px; */
+            align-items: start;
+        }
 
-    .notification-item:last-child {
-        border-bottom: none;
-    }
+        /* Card Styles */
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
 
-    .notification-icon {
-        flex-shrink: 0;
-        width: 40px;
-        height: 40px;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 16px;
-        background-color: var(--primary-light);
-        color: white;
-    }
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05));
+            z-index: -1;
+        }
 
-    .notification-icon.success {
-        background-color: var(--success-color);
-    }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.3);
+        }
 
-    .notification-icon.warning {
-        background-color: var(--warning-color);
-    }
+        .card-header {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            gap: 12px; /* optional spacing between title and button */
+        }
 
-    .notification-icon.danger {
-        background-color: var(--danger-color);
-    }
+        .card-header .card-title {
+            margin: 0; /* remove default margins so centering works */
+        }
 
-    .notification-content {
-        flex-grow: 1;
-        min-width: 0;
-    }
+        .card-header #markAllRead {
+            margin-left: auto; /* extra-safe push to the right */
+        }
 
-    .notification-title {
-        font-weight: 600;
-        margin: 0 0 4px 0;
-        color: var(--gray-800);
-    }
+        .card-title i {
+            margin-right: 12px;
+            color: var(--primary);
+            font-size: 1.2rem;
+            -webkit-text-fill-color: var(--primary);
+        }
 
-    .notification-description {
-        color: var(--gray-600);
-        margin: 0 0 8px 0;
-        font-size: 0.9rem;
-    }
+        /* Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .notification-meta {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 8px;
-    }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
 
-    .notification-time {
-        font-size: 0.85rem;
-        color: var(--gray-500);
-    }
+        .btn:hover::before {
+            left: 100%;
+        }
 
-    .notification-actions {
-        display: flex;
-        gap: 8px;
-    }
+        .btn i {
+            margin-right: 8px;
+        }
 
-    /* Event Card Styles */
-    .event-container {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+        }
 
-    .event-card {
-        border-radius: 12px;
-        overflow: hidden;
-        position: relative;
-        border: none;
-        background-color: white;
-        transition: all 0.3s;
-        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
-    }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(99, 102, 241, 0.4);
+        }
 
-    .event-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    }
+        .btn-outline-primary {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
+        }
 
-    .event-card.research {
-        border-top: 4px solid var(--primary-color);
-    }
+        .btn-outline-primary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+        }
 
-    .event-card.innovation {
-        border-top: 4px solid var(--warning-color);
-    }
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #059669);
+            color: white;
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+        }
 
-    .event-header {
-        padding: 20px;
-        position: relative;
-    }
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(16, 185, 129, 0.4);
+        }
 
-    .event-icon {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        width: 40px;
-        height: 40px;
-        opacity: 0.8;
-    }
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning), #d97706);
+            color: white;
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+        }
 
-    .event-type {
-        display: inline-block;
-        padding: 4px 12px;
-        border-radius: 16px;
-        font-size: 0.8rem;
-        font-weight: 600;
-        margin-bottom: 8px;
-    }
+        .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(245, 158, 11, 0.4);
+        }
 
-    .event-type.research {
-        background-color: rgba(63, 81, 181, 0.1);
-        color: var(--primary-color);
-    }
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+        }
 
-    .event-type.innovation {
-        background-color: rgba(255, 152, 0, 0.1);
-        color: var(--warning-color);
-    }
+        .btn-block {
+            width: 100%;
+        }
 
-    .event-title {
-        font-size: 1.3rem;
-        font-weight: 600;
-        margin: 0 0 8px 0;
-        color: var(--gray-800);
-    }
+        /* Notification Styles */
+        .notification-list {
+            padding: 0;
+            max-height: 600px;
+            overflow-y: auto;
+        }
 
-    .event-date {
-        font-size: 0.85rem;
-        color: var(--gray-600);
-        display: flex;
-        align-items: center;
-        margin-bottom: 16px;
-    }
+        .notification-list::-webkit-scrollbar {
+            width: 6px;
+        }
 
-    .event-date i {
-        margin-right: 6px;
-    }
+        .notification-list::-webkit-scrollbar-track {
+            background: var(--glass-bg);
+            border-radius: 8px;
+        }
 
-    .event-description {
-        color: var(--gray-700);
-        margin-bottom: 24px;
-    }
+        .notification-list::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary), var(--accent-pink));
+            border-radius: 8px;
+        }
 
-    .event-actions {
-        display: flex;
-        gap: 10px;
-        padding: 0 20px 20px 20px;
-    }
+        .notification-item {
+            display: flex;
+            padding: 25px 30px;
+            border-bottom: 1px solid var(--glass-border);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
 
-    /* Button Styles */
-    .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 8px 16px;
-        border-radius: 8px;
-        font-weight: 500;
-        font-size: 0.9rem;
-        transition: all 0.2s;
-        cursor: pointer;
-        border: none;
-    }
+        .notification-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.03), rgba(139, 92, 246, 0.03));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
 
-    .btn i {
-        margin-right: 6px;
-    }
+        .notification-item:hover::before {
+            opacity: 1;
+        }
 
-    .btn-primary {
-        background-color: var(--primary-color);
-        color: white;
-    }
+        .notification-item:hover {
+            transform: translateX(5px);
+            background: rgba(99, 102, 241, 0.02);
+        }
 
-    .btn-primary:hover {
-        background-color: var(--primary-dark);
-        box-shadow: 0 4px 12px rgba(63, 81, 181, 0.2);
-    }
+        .notification-item:last-child {
+            border-bottom: none;
+        }
 
-    .btn-outline-primary {
-        background-color: transparent;
-        color: var(--primary-color);
-        border: 1px solid var(--primary-color);
-    }
+        .notification-icon {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
 
-    .btn-outline-primary:hover {
-        background-color: rgba(63, 81, 181, 1);
-    }
+        .notification-icon::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.2), transparent);
+            border-radius: 16px;
+        }
 
-    .btn-success {
-        background-color: var(--success-color);
-        color: white;
-    }
+        .notification-icon.success {
+            background: linear-gradient(135deg, var(--success), #059669);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+        }
 
-    .btn-success:hover {
-        background-color: #388e3c;
-        box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
-    }
+        .notification-icon.warning {
+            background: linear-gradient(135deg, var(--warning), #d97706);
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+        }
 
-    .btn-warning {
-        background-color: var(--warning-color);
-        color: white;
-    }
+        .notification-icon.danger {
+            background: linear-gradient(135deg, var(--error), #dc2626);
+            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+        }
 
-    .btn-warning:hover {
-        background-color: #f57c00;
-        box-shadow: 0 4px 12px rgba(255, 152, 0, 0.2);
-    }
+        .notification-content {
+            flex-grow: 1;
+            min-width: 0;
+        }
 
-    .btn-secondary {
-        background-color: var(--gray-500);
-        color: white;
-    }
+        .notification-title {
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+        }
 
-    .btn-secondary:hover {
-        background-color: var(--gray-600);
-    }
+        .notification-description {
+            color: var(--text-light);
+            margin: 0 0 15px 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
 
-    .btn-link {
-        background: none;
-        color: var(--primary-color);
-        padding: 4px 8px;
-    }
+        .notification-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
 
-    .btn-link:hover {
-        text-decoration: underline;
-    }
+        .notification-time {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+        }
 
-    .btn-sm {
-        padding: 4px 12px;
-        font-size: 0.85rem;
-    }
+        .notification-time i {
+            margin-right: 6px;
+        }
 
-    .btn-block {
-        display: flex;
-        width: 100%;
-    }
+        .notification-actions {
+            display: flex;
+            gap: 10px;
+        }
 
-    /* Empty State Styles */
-    .empty-state {
-        padding: 40px 20px;
-        text-align: center;
-        color: var(--gray-600);
-    }
+        /* Event Card Styles */
+        .event-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
 
-    .empty-state-icon {
-        font-size: 3rem;
-        color: var(--gray-400);
-        margin-bottom: 16px;
-    }
+        .event-container::-webkit-scrollbar {
+            width: 6px;
+        }
 
-    .empty-state-title {
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin-bottom: 8px;
-        color: var(--gray-700);
-    }
+        .event-container::-webkit-scrollbar-track {
+            background: var(--glass-bg);
+            border-radius: 8px;
+        }
 
-    .empty-state-description {
-        font-size: 0.95rem;
-        max-width: 300px;
-        margin: 0 auto;
-    }
+        .event-container::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary), var(--accent-pink));
+            border-radius: 8px;
+        }
 
-    /* Badge Styles */
-    .badge {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 3px 8px;
-        border-radius: 12px;
-        font-size: 0.75rem;
-        font-weight: 600;
-    }
+        .event-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
 
-    .badge-primary {
-        background-color: var(--primary-color);
-        color: white;
-    }
+        .event-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
 
-    .badge-counter {
-        position: absolute;
-        top: -8px;
-        right: -8px;
-        min-width: 20px;
-        height: 20px;
-        border-radius: 10px;
-        padding: 0 6px;
-        font-size: 0.75rem;
-        background-color: var(--danger-color);
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-</style>
+        .event-card:hover::before {
+            opacity: 1;
+        }
 
-<div class="content p-3">
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Notifications Column -->
-            <div class="col-lg-6">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <div class="card-title">
-                            <i class="fas fa-bell"></i> Notifications
+        .event-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .event-card.research {
+            border-top: 4px solid var(--primary);
+        }
+
+        .event-card.innovation {
+            border-top: 4px solid var(--warning);
+        }
+
+        .event-header {
+            padding: 25px;
+            position: relative;
+        }
+
+        .event-icon {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            width: 45px;
+            height: 45px;
+            opacity: 0.7;
+        }
+
+        .event-type {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .event-type.research {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
+            color: var(--primary);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .event-type.innovation {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.15));
+            color: var(--warning);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .event-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0 0 12px 0;
+            color: var(--text-dark);
+            line-height: 1.3;
+        }
+
+        .event-date {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            margin-bottom: 18px;
+            font-weight: 600;
+        }
+
+        .event-date i {
+            margin-right: 8px;
+            color: var(--primary);
+        }
+
+        .event-description {
+            color: var(--text-light);
+            margin-bottom: 25px;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .event-actions {
+            display: flex;
+            gap: 12px;
+            padding: 0 25px 25px 25px;
+        }
+
+        /* Empty State Styles */
+        .empty-state {
+            padding: 60px 30px;
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            opacity: 0.6;
+        }
+
+        .empty-state-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+
+        .empty-state-description {
+            font-size: 1rem;
+            max-width: 350px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* Badge Styles */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .badge-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+        }
+
+        .badge-counter {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            min-width: 22px;
+            height: 22px;
+            border-radius: 11px;
+            padding: 0 8px;
+            font-size: 0.75rem;
+            background: linear-gradient(135deg, var(--error), #dc2626);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .row {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px 15px;
+            }
+
+            .card {
+                border-radius: 16px;
+            }
+
+            .card-header {
+                padding: 20px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .card-title {
+                font-size: 1.2rem;
+            }
+
+            .notification-item {
+                padding: 20px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .notification-icon {
+                width: 45px;
+                height: 45px;
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .notification-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .event-header {
+                padding: 20px;
+            }
+
+            .event-actions {
+                padding: 0 20px 20px 20px;
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .particles { display: none; }
+        }
+
+        @media (max-width: 480px) {
+            .content {
+                padding: 15px 10px;
+            }
+
+            .card-header {
+                padding: 15px;
+            }
+
+            .notification-item {
+                padding: 15px;
+            }
+
+            .event-header {
+                padding: 15px;
+            }
+
+            .event-actions {
+                padding: 0 15px 15px 15px;
+            }
+        }
+
+        /* Animation classes */
+        .animate-in {
+            animation: slideInUp 0.6s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Focus styles */
+        .btn:focus,
+        *:focus {
+            outline: 3px solid rgba(99, 102, 241, 0.3);
+            outline-offset: 2px;
+        }
+    </style>
+    <!-- Particles Background -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Notifications Column -->
+                <div class="col-lg-6">
+                    <div class="card animate-in">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <div class="card-title mb-0">
+                                <i class="fas fa-bell"></i> Notifications
+                            </div>
+                            <button id="markAllRead" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-check-double"></i> Mark All Read
+                            </button>
                         </div>
-                        <button id="markAllRead" class="btn btn-outline-primary btn-sm ms-auto">
-                            <i class="fas fa-check-double"></i> Mark All Read
-                        </button>
-                    </div>
-                    <div class="card-body p-0">
-                        <?php if ($notification && count($notification) > 0): ?>
-                            <div class="notification-list">
-                                <?php foreach ($notification as $notify): ?>
-                                    <?php
-                                    $iconClass = 'fas fa-info-circle';
-                                    $typeClass = '';
 
-                                    // Determine icon and background based on content
-                                    if (
-                                        stripos($notify->rn_title, 'approved') !== false ||
-                                        stripos($notify->rn_description, 'approved') !== false
-                                    ) {
-                                        $iconClass = 'fas fa-check-circle';
-                                        $typeClass = 'success';
-                                    } elseif (
-                                        stripos($notify->rn_title, 'rejected') !== false ||
-                                        stripos($notify->rn_description, 'rejected') !== false ||
-                                        stripos($notify->rn_title, 'return') !== false
-                                    ) {
-                                        $iconClass = 'fas fa-times-circle';
-                                        $typeClass = 'danger';
-                                    } elseif (
-                                        stripos($notify->rn_title, 'update') !== false ||
-                                        stripos($notify->rn_description, 'update') !== false
-                                    ) {
-                                        $iconClass = 'fas fa-sync';
-                                        $typeClass = 'warning';
-                                    }
-                                    ?>
+                        <div class="card-body p-0">
+                            <!-- Sample notifications for demo -->
+                            <?php if ($notification && count($notification) > 0): ?>
+                                <div class="notification-list">
+                                    <?php foreach ($notification as $notify): ?>
+                                        <?php
+                                            $iconClass = 'fas fa-info-circle';
+                                            $typeClass = '';
+
+                                            // Determine icon and background based on content
+                                            if (
+                                                stripos($notify->rn_title, 'approved') !== false ||
+                                                stripos($notify->rn_description, 'approved') !== false
+                                            ) {
+                                                $iconClass = 'fas fa-check-circle';
+                                                $typeClass = 'success';
+                                            } elseif (
+                                                stripos($notify->rn_title, 'rejected') !== false ||
+                                                stripos($notify->rn_description, 'rejected') !== false ||
+                                                stripos($notify->rn_title, 'return') !== false
+                                            ) {
+                                                $iconClass = 'fas fa-times-circle';
+                                                $typeClass = 'danger';
+                                            } elseif (
+                                                stripos($notify->rn_title, 'update') !== false ||
+                                                stripos($notify->rn_description, 'update') !== false
+                                            ) {
+                                                $iconClass = 'fas fa-sync';
+                                                $typeClass = 'warning';
+                                            }
+                                        ?>
                                     <div class="notification-item">
                                         <div class="notification-icon <?= $typeClass ?>">
                                             <i class="<?= $iconClass ?>"></i>
@@ -445,7 +750,7 @@
                                             <p class="notification-description"><?= $notify->rn_description ?></p>
                                             <div class="notification-meta">
                                                 <span class="notification-time">
-                                                    <i class="fas fa-clock fa-sm"></i> <?= timeAgo($notify->rn_created_at); ?>
+                                                    <i class="fas fa-clock"></i> <?= timeAgo($notify->rn_created_at); ?>
                                                 </span>
                                                 <div class="notification-actions">
                                                     <button class="btn btn-outline-primary btn-sm mark-read" data-id="<?= $notify->rn_id; ?>">
@@ -455,210 +760,103 @@
                                             </div>
                                         </div>
                                     </div>
-                                <?php endforeach; ?>
-                            </div>
-                        <?php else: ?>
-                            <div class="empty-state">
-                                <div class="empty-state-icon">
-                                    <i class="fas fa-bell-slash"></i>
-                                </div>
-                                <h4 class="empty-state-title">No Notifications</h4>
-                                <p class="empty-state-description">You're all caught up! New notifications will appear here.</p>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </div>
+                                    <?php endforeach; ?>
 
-            <!-- Events Column -->
-            <div class="col-lg-6">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">
-                            <i class="fas fa-calendar-alt"></i> Events & Research
+                                </div>
+                            <?php else: ?>
+                                <!-- Empty state example (hidden by default) -->
+                                <div class="empty-state">
+                                    <div class="empty-state-icon">
+                                        <i class="fas fa-bell-slash"></i>
+                                    </div>
+                                    <h4 class="empty-state-title">No Notifications</h4>
+                                    <p class="empty-state-description">You're all caught up! New notifications will appear here.</p>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <?php if (empty($event)): ?>
-                            <div class="empty-state">
-                                <div class="empty-state-icon">
-                                    <i class="fas fa-calendar-times"></i>
+                </div>
+
+                <!-- Events Column -->
+                <div class="col-lg-6">
+                    <div class="card animate-in">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fas fa-calendar-alt"></i> Events & Research
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <?php if (empty($event)): ?>
+                                <div class="empty-state">
+                                    <div class="empty-state-icon">
+                                        <i class="fas fa-calendar-times"></i>
+                                    </div>
+                                    <h4 class="empty-state-title">No Events Available</h4>
+                                    <p class="empty-state-description">There are currently no active events. Check back later!</p>
                                 </div>
-                                <h4 class="empty-state-title">No Events Available</h4>
-                                <p class="empty-state-description">There are currently no active events. Check back later!</p>
-                            </div>
-                        <?php else: ?>
-                            <div class="event-container">
-                                <?php foreach ($event as $e): ?>
-                                    <?php if ($e->re_type === 'research'): ?>
-                                        <div class="event-card research">
-                                            <div class="event-header">
-                                                <span class="event-type research">Research Project</span>
-                                                <h3 class="event-title"><?= $e->re_name ?></h3>
-                                                <div class="event-date">
-                                                    <i class="fas fa-calendar-day"></i>
-                                                    <?= isset($e->re_date) ? date('M d, Y', strtotime($e->re_date)) : 'Ongoing' ?>
+                            <?php else: ?>
+                                <div class="event-container">
+                                    <?php foreach ($event as $e): ?>
+                                        <?php if ($e->re_type === 'research'): ?>
+                                            <!-- Research Event -->
+                                            <div class="event-card research">
+                                                <div class="event-header">
+                                                    <span class="event-type research">Research Project</span>
+                                                    <h3 class="event-title"><?= $e->re_name ?></h3>
+                                                    <div class="event-date">
+                                                        <i class="fas fa-calendar-day"></i>
+                                                        <?= isset($e->re_date) ? date('M d, Y', strtotime($e->re_date)) : 'Ongoing' ?>
+                                                    </div>
+                                                    <p class="event-description"><?= $e->re_description ?></p>
+                                                    <svg class="event-icon" fill="var(--primary)" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M4 3.75A1.75 1.75 0 015.75 2h8.5A1.75 1.75 0 0116 3.75V6h3.25A1.75 1.75 0 0121 7.75v12.5A1.75 1.75 0 0119.25 22H5.75A1.75 1.75 0 014 20.25V3.75zM6.5 4.5v15h12V8H14.75A1.75 1.75 0 0113 6.25V4.5H6.5z" />
+                                                    </svg>
                                                 </div>
-                                                <p class="event-description"><?= $e->re_description ?></p>
-                                                <svg class="event-icon" fill="<?= "var(--primary-color)" ?>" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M4 3.75A1.75 1.75 0 015.75 2h8.5A1.75 1.75 0 0116 3.75V6h3.25A1.75 1.75 0 0121 7.75v12.5A1.75 1.75 0 0119.25 22H5.75A1.75 1.75 0 014 20.25V3.75zM6.5 4.5v15h12V8H14.75A1.75 1.75 0 0113 6.25V4.5H6.5z" />
-                                                </svg>
-                                            </div>
-                                            <div class="event-actions">
-                                                <a href="<?= base_url('participant/event/get_participant_event_dashboard/') . $e->re_id ?>"
-                                                    class="btn btn-primary btn-block">
-                                                    <i class="fas fa-user-friends"></i>
-                                                    Join as Participant
-                                                </a>
-                                                <a href="<?= base_url('judge/event/get_judge_event_dashboard/') . $e->re_id ?>"
-                                                    class="btn btn-warning btn-block">
-                                                    <i class="fas fa-gavel"></i>
-                                                    Join as Reviewer
-                                                </a>
-                                            </div>
-                                        </div>
-                                    <?php else: ?>
-                                        <div class="event-card innovation">
-                                            <div class="event-header">
-                                                <span class="event-type innovation">Innovation</span>
-                                                <h3 class="event-title">Product Profile (Innovation)</h3>
-                                                <div class="event-date">
-                                                    <i class="fas fa-calendar-day"></i>
-                                                    <?= isset($e->re_date) ? date('M d, Y', strtotime($e->re_date)) : 'Ongoing' ?>
+                                                <div class="event-actions">
+                                                    <a href="<?= base_url('participant/event/get_participant_event_dashboard/') . $e->re_id ?>" class="btn btn-primary btn-block">
+                                                        <i class="fas fa-user-friends"></i>
+                                                        Join as Participant
+                                                    </a>
+                                                    <a href="<?= base_url('judge/event/get_judge_event_dashboard/') . $e->re_id ?>" class="btn btn-warning btn-block">
+                                                        <i class="fas fa-gavel"></i>
+                                                        Join as Reviewer
+                                                    </a>
                                                 </div>
-                                                <p class="event-description">
-                                                    Showcase your innovative products and solutions.
-                                                    Join this opportunity to present your ideas to experts and gain valuable feedback.
-                                                </p>
-                                                <svg class="event-icon" fill="<?= "var(--warning-color)" ?>" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 2a5.5 5.5 0 00-5.5 5.5c0 1.856.87 3.486 2.25 4.533V14h6.5v-1.967A5.5 5.5 0 0012 2zm-4 9a4 4 0 018 0H8z" />
-                                                    <path d="M9.5 15a.5.5 0 01.5.5v1.25a2 2 0 001 1.732V20a.5.5 0 01-1 0v-1a2 2 0 00-1-1.732V15.5a.5.5 0 01.5-.5zM13 17.5a.5.5 0 01.5.5v1a.5.5 0 01-1 0v-1a.5.5 0 01.5-.5z" />
-                                                </svg>
                                             </div>
-                                            <div class="event-actions">
-                                                <a href="#" class="btn btn-outline-primary btn-block">
-                                                    <i class="fas fa-info-circle"></i>
-                                                    More Details
-                                                </a>
-                                                <a href="#" class="btn btn-success btn-block">
-                                                    <i class="fas fa-sign-in-alt"></i>
-                                                    Register Now
-                                                </a>
+                                        <?php else: ?>
+                                            <!-- Innovation Event -->
+                                            <div class="event-card innovation">
+                                                <div class="event-header">
+                                                    <span class="event-type innovation">Innovation</span>
+                                                    <h3 class="event-title"><?= $e->re_name ?></h3>
+                                                    <div class="event-date">
+                                                        <i class="fas fa-calendar-day"></i>
+                                                        <?= isset($e->re_date) ? date('M d, Y', strtotime($e->re_date)) : 'Ongoing' ?>
+                                                    </div>
+                                                    <p class="event-description"><?= $e->re_description ?></p>
+                                                    <svg class="event-icon" fill="var(--primary)" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M4 3.75A1.75 1.75 0 015.75 2h8.5A1.75 1.75 0 0116 3.75V6h3.25A1.75 1.75 0 0121 7.75v12.5A1.75 1.75 0 0119.25 22H5.75A1.75 1.75 0 014 20.25V3.75zM6.5 4.5v15h12V8H14.75A1.75 1.75 0 0113 6.25V4.5H6.5z" />
+                                                    </svg>
+                                                </div>
+                                                <div class="event-actions">
+                                                    <a href="<?= base_url('participant/event/get_participant_event_dashboard/') . $e->re_id ?>" class="btn btn-primary btn-block">
+                                                        <i class="fas fa-user-friends"></i>
+                                                        Join as Participant
+                                                    </a>
+                                                    <a href="<?= base_url('judge/event/get_judge_event_dashboard/') . $e->re_id ?>" class="btn btn-warning btn-block">
+                                                        <i class="fas fa-gavel"></i>
+                                                        Join as Reviewer
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
-                            </div>
-                        <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<script>
-    $(document).ready(function() {
-        let csrfName = '<?= csrf_token() ?>'; // CSRF Token Name
-        let csrfHash = '<?= csrf_hash() ?>'; // CSRF Hash
-
-        function updateCsrfToken(newToken) {
-            csrfHash = newToken; // Update CSRF token
-        }
-
-        $(".mark-read").click(function() {
-            let notificationId = $(this).data("id");
-            let button = $(this);
-
-            $.ajax({
-                url: "<?= base_url('user/notification/mark-as-read'); ?>",
-                type: "POST",
-                data: {
-                    [csrfName]: csrfHash,
-                    id: notificationId
-                },
-                dataType: "json",
-                success: function(response) {
-                    if (response.success) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Marked as Read',
-                            text: 'Notification has been marked as read.',
-                            timer: 1500,
-                            showConfirmButton: false
-                        }).then(() => {
-                            button.closest('.notification-item').fadeOut();
-                        });
-
-                        // Update CSRF token
-                        updateCsrfToken(response.csrf_token);
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Failed',
-                            text: response.message
-                        });
-                    }
-                },
-                error: function() {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Something went wrong. Please try again later.'
-                    });
-                }
-            });
-        });
-
-        $("#markAllRead").click(function() {
-            Swal.fire({
-                title: "Mark All as Read?",
-                text: "This will mark all your notifications as read.",
-                icon: "question",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, Mark All"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: "<?= base_url('user/notification/mark-all-read') ?>",
-                        type: "POST",
-                        data: {
-                            [csrfName]: csrfHash
-                        },
-                        dataType: "json",
-                        success: function(response) {
-                            if (response.success) {
-                                Swal.fire({
-                                    icon: "success",
-                                    title: "Marked All as Read",
-                                    text: "All notifications have been updated.",
-                                    confirmButtonColor: "#3085d6"
-                                }).then(() => {
-                                    $(".notification-item").fadeOut();
-                                });
-
-                                // Update CSRF token
-                                updateCsrfToken(response.csrf_token);
-                            } else {
-                                Swal.fire({
-                                    icon: "error",
-                                    title: "Failed",
-                                    text: response.message
-                                });
-                            }
-                        },
-                        error: function() {
-                            Swal.fire({
-                                icon: "error",
-                                title: "Error",
-                                text: "Something went wrong. Please try again."
-                            });
-                        }
-                    });
-                }
-            });
-        });
-    });
-</script>
+                                

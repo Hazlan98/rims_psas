@@ -70,7 +70,7 @@
             </div>
             <div class="modal-body">
                 <!-- Form Inside Modal -->
-                <form method="post" enctype="multipart/form-data" id="newResearchForm">
+                <form method="POST" enctype="multipart/form-data" id="newResearchForm">
                     <div class="row mb-3">
                         <div class="col-md-8">
                             <label for="eventName" class="form-label">Event Name</label>
@@ -176,7 +176,7 @@
                 // Send AJAX request
                 $.ajax({
                     url: "<?= base_url('superAdmin/event/submit_research_event') ?>",
-                    type: 'post',
+                    type: 'POST',
                     data: formData,
                     dataType: 'json',
                     processData: false,

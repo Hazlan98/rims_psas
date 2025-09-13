@@ -106,6 +106,7 @@ class EventController extends BaseController
             return $this->response->setJSON([
                 'error'     => true,
                 'messages'  => $this->validator->getErrors(),
+                'csrfHash' => csrf_hash()
             ]);
         }
 
@@ -124,6 +125,7 @@ class EventController extends BaseController
             return $this->response->setJSON([
                 'error' => true,
                 'messages' => 'File upload failed.',
+                'csrfHash' => csrf_hash()
             ]);
         }
 
@@ -149,6 +151,7 @@ class EventController extends BaseController
         return $this->response->setJSON([
             'status' => 'success',
             'message' => 'Event submitted successfully!',
+            'csrfHash' => csrf_hash()
         ]);
     }
 

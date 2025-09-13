@@ -75,7 +75,7 @@ class ResearchController extends BaseController
     {
         // get user id
         $user_id = $this->session->get('user_id');
-        // if ($this->request->getMethod() === 'post') {
+        // if ($this->request->getMethod() === 'POST') {
         $validationRules = [
             'projectTitle'      => 'required',
             'projectCategory'   => 'required',

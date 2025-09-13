@@ -100,7 +100,7 @@
                 // Send AJAX request
                 $.ajax({
                     url: "<?= base_url('superAdmin/event/submit_event') ?>",
-                    type: 'post',
+                    type: 'POST',
                     data: formData,
                     dataType: 'json',
                     processData: false,

@@ -45,10 +45,14 @@ class UserAccessController extends BaseController
         if ($this->auth_groups_users->insert($data)) {
             return $this->response->setJSON([
                 'status' => 'success',
-                'updated_role' => get_user_role($user_id)
+                'updated_role' => get_user_role($user_id),
+                'csrfHash' => csrf_hash()
             ]);
         } else {
-            return $this->response->setStatusCode(500)->setJSON(['status' => 'error']);
+            return $this->response->setStatusCode(500)->setJSON([
+            'status' => 'error',
+            'csrfHash' => csrf_hash()
+        ]);
         }
     }
 
@@ -57,9 +61,15 @@ class UserAccessController extends BaseController
         $user_id = $this->request->getPost('user_id');
 
         if ($this->auth_groups_users->where('agu_au_id', $user_id)->delete()) {
-            return $this->response->setJSON(['status' => 'success']);
+            return $this->response->setJSON([
+                'status' => 'success',
+                'csrfHash' => csrf_hash()
+            ]);
         } else {
-            return $this->response->setStatusCode(500)->setJSON(['status' => 'error']);
+            return $this->response->setStatusCode(500)->setJSON([
+                'status' => 'error',
+                'csrfHash' => csrf_hash()
+            ]);
         }
     }
 }

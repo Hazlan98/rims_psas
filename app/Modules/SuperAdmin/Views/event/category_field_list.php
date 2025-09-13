@@ -137,7 +137,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" action="<?= base_url('superAdmin/category/insert-new-field') ?>" enctype="multipart/form-data" id="newResearchForm">
+                <form method="POST" action="<?= base_url('superAdmin/category/insert-new-field') ?>" enctype="multipart/form-data" id="newResearchForm">
                     <?= csrf_field() ?>
 
                     <div class="mb-3">

@@ -368,7 +368,7 @@
   </div>
 
   <div class="cont">
-    <form action="<?= base_url('auth/attempt_login') ?>" method="post">
+    <form action="<?= base_url('auth/attempt_login') ?>" method="POST">
       <?= csrf_field() ?>
       <div class="form sign-in">
         <h2>Welcome Back</h2>
@@ -401,7 +401,7 @@
         </div>
       </div>
 
-      <form action="<?= base_url('auth/attempt_register') ?>" method="post">
+      <form action="<?= base_url('auth/attempt_register') ?>" method="POST">
         <?= csrf_field() ?>
         <div class="form sign-up">
           <h2>Create Account</h2>
