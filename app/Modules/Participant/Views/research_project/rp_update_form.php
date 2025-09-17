@@ -42,7 +42,7 @@
 
     body {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+        background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
         background-size: 400% 400%;
         animation: gradientShift 15s ease infinite;
         min-height: 100vh;
@@ -50,8 +50,15 @@
     }
 
     @keyframes gradientShift {
-        0%, 100% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
+
+        0%,
+        100% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
     }
 
     /* Particles background */
@@ -73,23 +80,99 @@
         animation: float 8s infinite ease-in-out;
     }
 
-    .particle:nth-child(odd) { animation-direction: reverse; }
-
-    @keyframes float {
-        0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-        10%, 90% { opacity: 1; }
-        100% { transform: translateY(-100px) rotate(360deg); }
+    .particle:nth-child(odd) {
+        animation-direction: reverse;
     }
 
-    .particle:nth-child(1) { width: 8px; height: 8px; left: 10%; animation-delay: 0s; animation-duration: 6s; }
-    .particle:nth-child(2) { width: 12px; height: 12px; left: 20%; animation-delay: 1s; animation-duration: 8s; }
-    .particle:nth-child(3) { width: 6px; height: 6px; left: 30%; animation-delay: 2s; animation-duration: 7s; }
-    .particle:nth-child(4) { width: 10px; height: 10px; left: 40%; animation-delay: 3s; animation-duration: 9s; }
-    .particle:nth-child(5) { width: 14px; height: 14px; left: 50%; animation-delay: 4s; animation-duration: 6s; }
-    .particle:nth-child(6) { width: 10px; height: 10px; left: 60%; animation-delay: 2.5s; animation-duration: 7s; }
-    .particle:nth-child(7) { width: 8px; height: 8px; left: 70%; animation-delay: 4s; animation-duration: 9s; }
-    .particle:nth-child(8) { width: 6px; height: 6px; left: 80%; animation-delay: 1.5s; animation-duration: 6s; }
-    .particle:nth-child(9) { width: 12px; height: 12px; left: 90%; animation-delay: 3.5s; animation-duration: 8s; }
+    @keyframes float {
+
+        0%,
+        100% {
+            transform: translateY(100vh) rotate(0deg);
+            opacity: 0;
+        }
+
+        10%,
+        90% {
+            opacity: 1;
+        }
+
+        100% {
+            transform: translateY(-100px) rotate(360deg);
+        }
+    }
+
+    .particle:nth-child(1) {
+        width: 8px;
+        height: 8px;
+        left: 10%;
+        animation-delay: 0s;
+        animation-duration: 6s;
+    }
+
+    .particle:nth-child(2) {
+        width: 12px;
+        height: 12px;
+        left: 20%;
+        animation-delay: 1s;
+        animation-duration: 8s;
+    }
+
+    .particle:nth-child(3) {
+        width: 6px;
+        height: 6px;
+        left: 30%;
+        animation-delay: 2s;
+        animation-duration: 7s;
+    }
+
+    .particle:nth-child(4) {
+        width: 10px;
+        height: 10px;
+        left: 40%;
+        animation-delay: 3s;
+        animation-duration: 9s;
+    }
+
+    .particle:nth-child(5) {
+        width: 14px;
+        height: 14px;
+        left: 50%;
+        animation-delay: 4s;
+        animation-duration: 6s;
+    }
+
+    .particle:nth-child(6) {
+        width: 10px;
+        height: 10px;
+        left: 60%;
+        animation-delay: 2.5s;
+        animation-duration: 7s;
+    }
+
+    .particle:nth-child(7) {
+        width: 8px;
+        height: 8px;
+        left: 70%;
+        animation-delay: 4s;
+        animation-duration: 9s;
+    }
+
+    .particle:nth-child(8) {
+        width: 6px;
+        height: 6px;
+        left: 80%;
+        animation-delay: 1.5s;
+        animation-duration: 6s;
+    }
+
+    .particle:nth-child(9) {
+        width: 12px;
+        height: 12px;
+        left: 90%;
+        animation-delay: 3.5s;
+        animation-duration: 8s;
+    }
 
     .content {
         padding: 30px;
@@ -99,7 +182,7 @@
     }
 
     /* App Header */
-    .app-header {
+    /* .app-header {
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(20px);
         border-radius: 20px 20px 0 0;
@@ -107,7 +190,7 @@
         padding: 25px 30px;
         margin-bottom: 0;
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    }
+    } */
 
     .app-title {
         font-size: 1.5rem;
@@ -355,7 +438,7 @@
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
         transition: left 0.5s;
     }
 
@@ -553,6 +636,7 @@
             opacity: 0;
             transform: translateY(30px);
         }
+
         to {
             opacity: 1;
             transform: translateY(0);
@@ -575,7 +659,9 @@
             gap: 10px;
         }
 
-        .particles { display: none; }
+        .particles {
+            display: none;
+        }
     }
 
     @media (max-width: 480px) {
@@ -657,7 +743,7 @@
 
                             <?php else: ?>
                                 <label for="paperFile" class="btn-upload">
-                                    <input type="file" class="form-control file-input-hidden" id="paperFile" name="paperFile" accept=".pdf">
+                                    <input type="file" class="form-control" id="paperFile" name="paperFile" accept=".pdf">
                                 </label>
                             <?php endif; ?>
                         </div>
@@ -754,6 +840,12 @@
 <!-- JavaScript -->
 <script>
     $(document).ready(function() {
+
+
+        // CSRF token initialization
+        let csrfName = '<?= csrf_token() ?>';
+        let csrfHash = '<?= csrf_hash() ?>';
+
         // Initialize Select2
         $('.select2').select2({
             // theme: 'bootstrap4',
@@ -886,6 +978,10 @@
                             });
                         },
                         success: function(response) {
+                            // 🔑 Refresh CSRF Token if sent back by server
+                            if (response.csrfToken) {
+                                $('input[name="<?= csrf_token() ?>"]').val(response.csrfToken);
+                            }
                             try {
                                 const result = JSON.parse(response);
                                 if (result.status === 'success') {
@@ -917,10 +1013,17 @@
                             }
                         },
                         error: function(xhr, status, error) {
+                            let resp = xhr.responseJSON; // ✅ parse JSON from server
+
+                            // 🔑 Refresh CSRF Token if sent back by server
+                            if (resp && resp.csrfToken) {
+                                $('input[name="<?= csrf_token() ?>"]').val(resp.csrfToken);
+                            }
+
                             Swal.fire({
                                 icon: "error",
-                                title: "Submission Failed",
-                                text: xhr.responseText || "Something went wrong with your submission. Please try again.",
+                                title: "Save Failed",
+                                text: (resp && resp.errors) ? JSON.stringify(resp.errors) : (xhr.responseText || "Something went wrong."),
                                 confirmButtonColor: "#dc3545"
                             });
                         },
@@ -965,6 +1068,10 @@
                             });
                         },
                         success: function(response) {
+                            // 🔑 Refresh CSRF Token if sent back by server
+                            if (response.csrfToken) {
+                                $('input[name="<?= csrf_token() ?>"]').val(response.csrfToken);
+                            }
                             try {
                                 const result = JSON.parse(response);
                                 if (result.status === 'success') {
@@ -996,10 +1103,17 @@
                             }
                         },
                         error: function(xhr, status, error) {
+                            let resp = xhr.responseJSON; // ✅ parse JSON from server
+
+                            // 🔑 Refresh CSRF Token if sent back by server
+                            if (resp && resp.csrfToken) {
+                                $('input[name="<?= csrf_token() ?>"]').val(resp.csrfToken);
+                            }
+
                             Swal.fire({
                                 icon: "error",
                                 title: "Save Failed",
-                                text: xhr.responseText || "Something went wrong. Please try again.",
+                                text: (resp && resp.errors) ? JSON.stringify(resp.errors) : (xhr.responseText || "Something went wrong."),
                                 confirmButtonColor: "#dc3545"
                             });
                         },
@@ -1007,15 +1121,6 @@
                 }
             });
         });
-    });
-</script>
-
-<!-- Delete Attachment Function -->
-<script>
-    $(document).ready(function() {
-        // CSRF token initialization
-        let csrfName = '<?= csrf_token() ?>';
-        let csrfHash = '<?= csrf_hash() ?>';
 
         // Delete file handler
         $(document).on("click", ".deleteFile", function() {
@@ -1060,7 +1165,7 @@
                                     confirmButtonColor: "#28a745"
                                 });
 
-                                button.closest("div").html('<input type="file" class="form-control" id = "paperFile" name = "paperFile" required >');
+                                button.closest("div").html('<input type="file" class="form-control" id = "paperFile" name = "paperFile" accept = ".pdf" required >');
 
                                 // Update CSRF token after request
                                 csrfName = response.csrfName;

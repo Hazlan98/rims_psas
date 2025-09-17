@@ -1,17 +1,17 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <!-- Hazlan Custom Template -->
     <link rel="stylesheet" href="<?= base_url('assets/HazlanTemplate/css/card.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/HazlanTemplate/css/table.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/HazlanTemplate/css/select2.css'); ?>">
-    
+
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
-    
+
     <!-- Modern Glassmorphism Styles -->
     <style>
         :root {
@@ -39,7 +39,7 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+            background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
             min-height: 100vh;
@@ -47,8 +47,15 @@
         }
 
         @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
         }
 
         /* Particles background */
@@ -70,23 +77,99 @@
             animation: float 8s infinite ease-in-out;
         }
 
-        .particle:nth-child(odd) { animation-direction: reverse; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10%, 90% { opacity: 1; }
-            100% { transform: translateY(-100px) rotate(360deg); }
+        .particle:nth-child(odd) {
+            animation-direction: reverse;
         }
 
-        .particle:nth-child(1) { width: 8px; height: 8px; left: 10%; animation-delay: 0s; animation-duration: 6s; }
-        .particle:nth-child(2) { width: 12px; height: 12px; left: 20%; animation-delay: 1s; animation-duration: 8s; }
-        .particle:nth-child(3) { width: 6px; height: 6px; left: 30%; animation-delay: 2s; animation-duration: 7s; }
-        .particle:nth-child(4) { width: 10px; height: 10px; left: 40%; animation-delay: 3s; animation-duration: 9s; }
-        .particle:nth-child(5) { width: 14px; height: 14px; left: 50%; animation-delay: 4s; animation-duration: 6s; }
-        .particle:nth-child(6) { width: 10px; height: 10px; left: 60%; animation-delay: 2.5s; animation-duration: 7s; }
-        .particle:nth-child(7) { width: 8px; height: 8px; left: 70%; animation-delay: 4s; animation-duration: 9s; }
-        .particle:nth-child(8) { width: 6px; height: 6px; left: 80%; animation-delay: 1.5s; animation-duration: 6s; }
-        .particle:nth-child(9) { width: 12px; height: 12px; left: 90%; animation-delay: 3.5s; animation-duration: 8s; }
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10%,
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+
+        .particle:nth-child(1) {
+            width: 8px;
+            height: 8px;
+            left: 10%;
+            animation-delay: 0s;
+            animation-duration: 6s;
+        }
+
+        .particle:nth-child(2) {
+            width: 12px;
+            height: 12px;
+            left: 20%;
+            animation-delay: 1s;
+            animation-duration: 8s;
+        }
+
+        .particle:nth-child(3) {
+            width: 6px;
+            height: 6px;
+            left: 30%;
+            animation-delay: 2s;
+            animation-duration: 7s;
+        }
+
+        .particle:nth-child(4) {
+            width: 10px;
+            height: 10px;
+            left: 40%;
+            animation-delay: 3s;
+            animation-duration: 9s;
+        }
+
+        .particle:nth-child(5) {
+            width: 14px;
+            height: 14px;
+            left: 50%;
+            animation-delay: 4s;
+            animation-duration: 6s;
+        }
+
+        .particle:nth-child(6) {
+            width: 10px;
+            height: 10px;
+            left: 60%;
+            animation-delay: 2.5s;
+            animation-duration: 7s;
+        }
+
+        .particle:nth-child(7) {
+            width: 8px;
+            height: 8px;
+            left: 70%;
+            animation-delay: 4s;
+            animation-duration: 9s;
+        }
+
+        .particle:nth-child(8) {
+            width: 6px;
+            height: 6px;
+            left: 80%;
+            animation-delay: 1.5s;
+            animation-duration: 6s;
+        }
+
+        .particle:nth-child(9) {
+            width: 12px;
+            height: 12px;
+            left: 90%;
+            animation-delay: 3.5s;
+            animation-duration: 8s;
+        }
 
         .content {
             padding: 30px;
@@ -228,7 +311,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.5s;
         }
 
@@ -241,6 +324,7 @@
             font-size: 0.75rem;
         }
 
+
         .btn-outline-primary {
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
@@ -251,6 +335,21 @@
 
         .btn-outline-primary:hover {
             background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-outline-warning {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            color: var(--warning);
+            border: 2px solid var(--warning);
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
+        }
+
+        .btn-outline-warning:hover {
+            background: var(--warning);
             color: white;
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
@@ -359,7 +458,7 @@
             line-height: 1 !important;
             font-size: 0.9rem !important;
         }
-        
+
         /* DataTables Custom Styling */
         .dataTables_wrapper .dataTables_length select,
         .dataTables_wrapper .dataTables_filter input {
@@ -410,6 +509,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -438,7 +538,9 @@
                 gap: 6px;
             }
 
-            .particles { display: none; }
+            .particles {
+                display: none;
+            }
         }
 
         @media (max-width: 480px) {
@@ -507,13 +609,13 @@
                                                 <td><?= esc($event->re_start_date) ?> - <?= esc($event->re_end_date) ?></td>
                                                 <td>0/<?= esc($event->re_max_participants) ?></td>
                                                 <td><?= esc($event->re_registration_deadline) ?></td>
-                                                <td><?= esc($event->re_status) ?></td>
+                                                <td><span class="badge bg-primary"><?= esc($event->re_status) ?></span></td>
                                                 <td>
                                                     <div class="btn-group">
-                                                        <a href="<?= base_url('superAdmin/event/get_event_details/') . $event->re_id ?>" class="btn btn-info btn-sm view-btn">
+                                                        <a href="<?= base_url('superAdmin/event/get_event_details/') . $event->re_id ?>" class="btn btn-outline-primary btn-sm view-btn">
                                                             <i class="fas fa-eye"></i>
                                                         </a>
-                                                        <a href="javascript:void(0);" class="btn btn-danger btn-sm delete-event" data-id="<?= $event->re_id ?>"><i class="fas fa-trash"></i></a>
+                                                        <a href="javascript:void(0);" class="btn btn-outline-danger btn-sm delete-event" data-id="<?= $event->re_id ?>"><i class="fas fa-trash"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -667,10 +769,10 @@
 
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    
+
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <!-- Select2 -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
@@ -694,10 +796,13 @@
             $('#example1').DataTable({
                 responsive: true,
                 pageLength: 10,
-                lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+                lengthMenu: [
+                    [5, 10, 25, 50, -1],
+                    [5, 10, 25, 50, "All"]
+                ],
                 dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>' +
-                     '<"row"<"col-sm-12"tr>>' +
-                     '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                    '<"row"<"col-sm-12"tr>>' +
+                    '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
                 language: {
                     search: "_INPUT_",
                     searchPlaceholder: "Search events...",
@@ -768,8 +873,8 @@
                             },
                             error: function(xhr, status, error) {
                                 console.log("XHR response:", xhr.responseText); // The actual server response
-                                console.log("Status:", status);                 // e.g. "error", "timeout"
-                                console.log("Error:", error);                   // e.g. "Internal Server Error"
+                                console.log("Status:", status); // e.g. "error", "timeout"
+                                console.log("Error:", error); // e.g. "Internal Server Error"
                                 Swal.fire('Error!', 'There was an issue with the submission. Please try again.', 'error');
                             }
 
@@ -783,51 +888,51 @@
             $('.delete-event').on('click', function(e) {
                 e.preventDefault();
 
-            let eventId = $(this).data('id');
-            let deleteBtn = $(this);
+                let eventId = $(this).data('id');
+                let deleteBtn = $(this);
 
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#d33",
-                cancelButtonColor: "#3085d6",
-                confirmButtonText: "Yes, delete it!"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: "<?= base_url('superAdmin/event/delete_event/') ?>" + eventId,
-                        type: "POST",
-                        data: {
-                            id: eventId,
-                            "<?= csrf_token() ?>": $('input[name="<?= csrf_token() ?>"]').val() // Send CSRF token
-                        },
-                        dataType: "json",
-                        success: function(response) {
-                            if (response.status === "success") {
-                                Swal.fire("Deleted!", response.message, "success");
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#d33",
+                    cancelButtonColor: "#3085d6",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "<?= base_url('superAdmin/event/delete_event/') ?>" + eventId,
+                            type: "POST",
+                            data: {
+                                id: eventId,
+                                "<?= csrf_token() ?>": $('input[name="<?= csrf_token() ?>"]').val() // Send CSRF token
+                            },
+                            dataType: "json",
+                            success: function(response) {
+                                if (response.status === "success") {
+                                    Swal.fire("Deleted!", response.message, "success");
 
-                                // Remove the deleted row
-                                deleteBtn.closest('tr').fadeOut(500, function() {
-                                    $(this).remove();
-                                });
+                                    // Remove the deleted row
+                                    deleteBtn.closest('tr').fadeOut(500, function() {
+                                        $(this).remove();
+                                    });
 
-                                // Update CSRF token
-                                $('input[name="<?= csrf_token() ?>"]').val(response.csrf_token);
-                            } else {
-                                Swal.fire("Error!", response.message, "error");
+                                    // Update CSRF token
+                                    $('input[name="<?= csrf_token() ?>"]').val(response.csrf_token);
+                                } else {
+                                    Swal.fire("Error!", response.message, "error");
 
-                                // Update CSRF token even if failed
-                                $('input[name="<?= csrf_token() ?>"]').val(response.csrf_token);
+                                    // Update CSRF token even if failed
+                                    $('input[name="<?= csrf_token() ?>"]').val(response.csrf_token);
+                                }
+                            },
+                            error: function() {
+                                Swal.fire("Error!", "Something went wrong.", "error");
                             }
-                        },
-                        error: function() {
-                            Swal.fire("Error!", "Something went wrong.", "error");
-                        }
-                    });
-                }
-            });
+                        });
+                    }
+                });
             });
 
             // Enhanced modal animations

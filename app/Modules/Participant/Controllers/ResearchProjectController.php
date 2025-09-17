@@ -303,8 +303,12 @@ class ResearchProjectController extends BaseController
         // }
 
         if (!$this->validate($validationRules)) {
-            return $this->response->setStatusCode(400)->setJSON($this->validator->getErrors());
+            return $this->response->setStatusCode(400)->setJSON([
+                'errors'    => $this->validator->getErrors(),
+                'csrfToken' => csrf_hash(), // 🔑 refresh token
+            ]);
         }
+
 
         // Initialize data array
         $rpi_data = [
@@ -365,7 +369,10 @@ class ResearchProjectController extends BaseController
             }
         }
 
-        return $this->response->setStatusCode(200)->setJSON(['message' => 'Research paper saved as draft!']);
+        return $this->response->setStatusCode(200)->setJSON([
+            'message'   => 'Research paper saved as draft!',
+            'csrfToken' => csrf_hash(), // 🔑 refresh token
+        ]);
     }
 
     public function submitParticipationResearchProject()
@@ -395,8 +402,12 @@ class ResearchProjectController extends BaseController
         // }
 
         if (!$this->validate($validationRules)) {
-            return $this->response->setStatusCode(400)->setJSON($this->validator->getErrors());
+            return $this->response->setStatusCode(400)->setJSON([
+                'errors'    => $this->validator->getErrors(),
+                'csrfToken' => csrf_hash(), // 🔑 refresh token
+            ]);
         }
+
 
         // Initialize data array
         $rpi_data = [
@@ -475,7 +486,10 @@ class ResearchProjectController extends BaseController
             }
         }
 
-        return $this->response->setStatusCode(200)->setJSON(['message' => 'Research paper saved as draft!']);
+        return $this->response->setStatusCode(200)->setJSON([
+            'message'   => 'Research paper saved as draft!',
+            'csrfToken' => csrf_hash(), // 🔑 refresh token
+        ]);
     }
 
     /**
@@ -626,6 +640,7 @@ class ResearchProjectController extends BaseController
             return $this->response->setStatusCode(400)->setJSON([
                 'success' => false,
                 'message' => 'Invalid request. Record not found.',
+                'csrfToken' => csrf_hash(), // 🔑 refresh token
             ]);
         }
 
@@ -660,6 +675,7 @@ class ResearchProjectController extends BaseController
             return $this->response->setJSON([
                 'success' => false,
                 'message' => implode('<br>', $validation->getErrors()),
+                'csrfToken' => csrf_hash(), // 🔑 refresh token
             ]);
         }
 
@@ -690,12 +706,14 @@ class ResearchProjectController extends BaseController
             return $this->response->setJSON([
                 'success' => true,
                 'message' => 'Files uploaded successfully!',
+                'csrfToken' => csrf_hash(), // 🔑 refresh token
             ]);
         }
 
         return $this->response->setStatusCode(400)->setJSON([
             'success' => false,
             'message' => 'Failed to update the record.',
+            'csrfToken' => csrf_hash(), // 🔑 refresh token
         ]);
     }
 

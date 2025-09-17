@@ -1,15 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academic Paper Review System</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Hazlan Custom Template -->
+    <link rel="stylesheet" href="<?= base_url('assets/HazlanTemplate/css/card.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/HazlanTemplate/css/table.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/HazlanTemplate/css/select2.css'); ?>">
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
 
     <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4338ca;
+            --primary-light: #8b5cf6;
+            --accent: #06b6d4;
+            --accent-pink: #ec4899;
+            --text-dark: #0f172a;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --error: #ef4444;
+            --warning: #f59e0b;
+            --surface: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.18);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -17,10 +37,137 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            color: #1e293b;
-            line-height: 1.6;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            color: var(--text-dark);
+        }
+
+        @keyframes gradientShift {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* Particles background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        .particle:nth-child(odd) {
+            animation-direction: reverse;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10%,
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+
+        .particle:nth-child(1) {
+            width: 8px;
+            height: 8px;
+            left: 10%;
+            animation-delay: 0s;
+            animation-duration: 6s;
+        }
+
+        .particle:nth-child(2) {
+            width: 12px;
+            height: 12px;
+            left: 20%;
+            animation-delay: 1s;
+            animation-duration: 8s;
+        }
+
+        .particle:nth-child(3) {
+            width: 6px;
+            height: 6px;
+            left: 30%;
+            animation-delay: 2s;
+            animation-duration: 7s;
+        }
+
+        .particle:nth-child(4) {
+            width: 10px;
+            height: 10px;
+            left: 40%;
+            animation-delay: 3s;
+            animation-duration: 9s;
+        }
+
+        .particle:nth-child(5) {
+            width: 14px;
+            height: 14px;
+            left: 50%;
+            animation-delay: 4s;
+            animation-duration: 6s;
+        }
+
+        .particle:nth-child(6) {
+            width: 10px;
+            height: 10px;
+            left: 60%;
+            animation-delay: 2.5s;
+            animation-duration: 7s;
+        }
+
+        .particle:nth-child(7) {
+            width: 8px;
+            height: 8px;
+            left: 70%;
+            animation-delay: 4s;
+            animation-duration: 9s;
+        }
+
+        .particle:nth-child(8) {
+            width: 6px;
+            height: 6px;
+            left: 80%;
+            animation-delay: 1.5s;
+            animation-duration: 6s;
+        }
+
+        .particle:nth-child(9) {
+            width: 12px;
+            height: 12px;
+            left: 90%;
+            animation-delay: 3.5s;
+            animation-duration: 8s;
         }
 
         .main-container {
@@ -29,10 +176,11 @@
         }
 
         .review-header {
-            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 12px 12px 0 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+            border-bottom: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            padding: 25px 30px;
+            border-radius: 20px 20px 0 0;
             box-shadow: 0 4px 20px rgba(30, 64, 175, 0.15);
         }
 
@@ -636,9 +784,18 @@
             }
         }
     </style>
-</head>
-
-<body>
+    <!-- Particles Background -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
     <div class="main-container">
         <div class="container-fluid">
             <!-- Header -->
@@ -1358,6 +1515,3 @@
             });
         });
     </script>
-</body>
-
-</html>

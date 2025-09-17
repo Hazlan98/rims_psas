@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
+
     <style>
         :root {
             --primary: #6366f1;
@@ -34,8 +35,15 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+            font-family:
+                "Inter",
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+            background: radial-gradient(circle,
+                    rgba(238, 174, 202, 1) 0%,
+                    rgba(148, 187, 233, 1) 100%);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
             min-height: 100vh;
@@ -43,8 +51,15 @@
         }
 
         @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
         }
 
         /* Particles background */
@@ -66,23 +81,99 @@
             animation: float 8s infinite ease-in-out;
         }
 
-        .particle:nth-child(odd) { animation-direction: reverse; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10%, 90% { opacity: 1; }
-            100% { transform: translateY(-100px) rotate(360deg); }
+        .particle:nth-child(odd) {
+            animation-direction: reverse;
         }
 
-        .particle:nth-child(1) { width: 8px; height: 8px; left: 10%; animation-delay: 0s; animation-duration: 6s; }
-        .particle:nth-child(2) { width: 12px; height: 12px; left: 20%; animation-delay: 1s; animation-duration: 8s; }
-        .particle:nth-child(3) { width: 6px; height: 6px; left: 30%; animation-delay: 2s; animation-duration: 7s; }
-        .particle:nth-child(4) { width: 10px; height: 10px; left: 40%; animation-delay: 3s; animation-duration: 9s; }
-        .particle:nth-child(5) { width: 14px; height: 14px; left: 50%; animation-delay: 4s; animation-duration: 6s; }
-        .particle:nth-child(6) { width: 10px; height: 10px; left: 60%; animation-delay: 2.5s; animation-duration: 7s; }
-        .particle:nth-child(7) { width: 8px; height: 8px; left: 70%; animation-delay: 4s; animation-duration: 9s; }
-        .particle:nth-child(8) { width: 6px; height: 6px; left: 80%; animation-delay: 1.5s; animation-duration: 6s; }
-        .particle:nth-child(9) { width: 12px; height: 12px; left: 90%; animation-delay: 3.5s; animation-duration: 8s; }
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10%,
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+
+        .particle:nth-child(1) {
+            width: 8px;
+            height: 8px;
+            left: 10%;
+            animation-delay: 0s;
+            animation-duration: 6s;
+        }
+
+        .particle:nth-child(2) {
+            width: 12px;
+            height: 12px;
+            left: 20%;
+            animation-delay: 1s;
+            animation-duration: 8s;
+        }
+
+        .particle:nth-child(3) {
+            width: 6px;
+            height: 6px;
+            left: 30%;
+            animation-delay: 2s;
+            animation-duration: 7s;
+        }
+
+        .particle:nth-child(4) {
+            width: 10px;
+            height: 10px;
+            left: 40%;
+            animation-delay: 3s;
+            animation-duration: 9s;
+        }
+
+        .particle:nth-child(5) {
+            width: 14px;
+            height: 14px;
+            left: 50%;
+            animation-delay: 4s;
+            animation-duration: 6s;
+        }
+
+        .particle:nth-child(6) {
+            width: 10px;
+            height: 10px;
+            left: 60%;
+            animation-delay: 2.5s;
+            animation-duration: 7s;
+        }
+
+        .particle:nth-child(7) {
+            width: 8px;
+            height: 8px;
+            left: 70%;
+            animation-delay: 4s;
+            animation-duration: 9s;
+        }
+
+        .particle:nth-child(8) {
+            width: 6px;
+            height: 6px;
+            left: 80%;
+            animation-delay: 1.5s;
+            animation-duration: 6s;
+        }
+
+        .particle:nth-child(9) {
+            width: 12px;
+            height: 12px;
+            left: 90%;
+            animation-delay: 3.5s;
+            animation-duration: 8s;
+        }
 
         .content {
             padding: 30px;
@@ -132,15 +223,18 @@
             display: flex !important;
             justify-content: space-between !important;
             align-items: center !important;
-            gap: 12px; /* optional spacing between title and button */
+            gap: 12px;
+            /* optional spacing between title and button */
         }
 
         .card-header .card-title {
-            margin: 0; /* remove default margins so centering works */
+            margin: 0;
+            /* remove default margins so centering works */
         }
 
         .card-header #markAllRead {
-            margin-left: auto; /* extra-safe push to the right */
+            margin-left: auto;
+            /* extra-safe push to the right */
         }
 
         .card-title i {
@@ -174,7 +268,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.5s;
         }
 
@@ -248,6 +342,7 @@
             padding: 0;
             max-height: 600px;
             overflow-y: auto;
+            overflow-x: hidden;
         }
 
         .notification-list::-webkit-scrollbar {
@@ -315,7 +410,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(45deg, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), transparent);
             border-radius: 16px;
         }
 
@@ -416,7 +511,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
             opacity: 0;
             transition: opacity 0.4s ease;
         }
@@ -634,7 +729,9 @@
                 justify-content: center;
             }
 
-            .particles { display: none; }
+            .particles {
+                display: none;
+            }
         }
 
         @media (max-width: 480px) {
@@ -669,6 +766,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -716,50 +814,50 @@
                                 <div class="notification-list">
                                     <?php foreach ($notification as $notify): ?>
                                         <?php
-                                            $iconClass = 'fas fa-info-circle';
-                                            $typeClass = '';
+                                        $iconClass = 'fas fa-info-circle';
+                                        $typeClass = '';
 
-                                            // Determine icon and background based on content
-                                            if (
-                                                stripos($notify->rn_title, 'approved') !== false ||
-                                                stripos($notify->rn_description, 'approved') !== false
-                                            ) {
-                                                $iconClass = 'fas fa-check-circle';
-                                                $typeClass = 'success';
-                                            } elseif (
-                                                stripos($notify->rn_title, 'rejected') !== false ||
-                                                stripos($notify->rn_description, 'rejected') !== false ||
-                                                stripos($notify->rn_title, 'return') !== false
-                                            ) {
-                                                $iconClass = 'fas fa-times-circle';
-                                                $typeClass = 'danger';
-                                            } elseif (
-                                                stripos($notify->rn_title, 'update') !== false ||
-                                                stripos($notify->rn_description, 'update') !== false
-                                            ) {
-                                                $iconClass = 'fas fa-sync';
-                                                $typeClass = 'warning';
-                                            }
+                                        // Determine icon and background based on content
+                                        if (
+                                            stripos($notify->rn_title, 'approved') !== false ||
+                                            stripos($notify->rn_description, 'approved') !== false
+                                        ) {
+                                            $iconClass = 'fas fa-check-circle';
+                                            $typeClass = 'success';
+                                        } elseif (
+                                            stripos($notify->rn_title, 'rejected') !== false ||
+                                            stripos($notify->rn_description, 'rejected') !== false ||
+                                            stripos($notify->rn_title, 'return') !== false
+                                        ) {
+                                            $iconClass = 'fas fa-times-circle';
+                                            $typeClass = 'danger';
+                                        } elseif (
+                                            stripos($notify->rn_title, 'update') !== false ||
+                                            stripos($notify->rn_description, 'update') !== false
+                                        ) {
+                                            $iconClass = 'fas fa-sync';
+                                            $typeClass = 'warning';
+                                        }
                                         ?>
-                                    <div class="notification-item">
-                                        <div class="notification-icon <?= $typeClass ?>">
-                                            <i class="<?= $iconClass ?>"></i>
-                                        </div>
-                                        <div class="notification-content">
-                                            <h5 class="notification-title"><?= $notify->rn_title ?></h5>
-                                            <p class="notification-description"><?= $notify->rn_description ?></p>
-                                            <div class="notification-meta">
-                                                <span class="notification-time">
-                                                    <i class="fas fa-clock"></i> <?= timeAgo($notify->rn_created_at); ?>
-                                                </span>
-                                                <div class="notification-actions">
-                                                    <button class="btn btn-outline-primary btn-sm mark-read" data-id="<?= $notify->rn_id; ?>">
-                                                        <i class="fas fa-check"></i> Mark Read
-                                                    </button>
+                                        <div class="notification-item">
+                                            <div class="notification-icon <?= $typeClass ?>">
+                                                <i class="<?= $iconClass ?>"></i>
+                                            </div>
+                                            <div class="notification-content">
+                                                <h5 class="notification-title"><?= $notify->rn_title ?></h5>
+                                                <p class="notification-description"><?= $notify->rn_description ?></p>
+                                                <div class="notification-meta">
+                                                    <span class="notification-time">
+                                                        <i class="fas fa-clock"></i> <?= timeAgo($notify->rn_created_at); ?>
+                                                    </span>
+                                                    <div class="notification-actions">
+                                                        <button class="btn btn-outline-primary btn-sm mark-read" data-id="<?= $notify->rn_id; ?>">
+                                                            <i class="fas fa-check"></i> Mark Read
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                     <?php endforeach; ?>
 
                                 </div>
@@ -859,109 +957,109 @@
             </div>
         </div>
     </div>
-                                
+
     <script>
-    $(document).ready(function() {
-        let csrfName = '<?= csrf_token() ?>'; // CSRF Token Name
-        let csrfHash = '<?= csrf_hash() ?>'; // CSRF Hash
+        $(document).ready(function() {
+            let csrfName = '<?= csrf_token() ?>'; // CSRF Token Name
+            let csrfHash = '<?= csrf_hash() ?>'; // CSRF Hash
 
-        function updateCsrfToken(newToken) {
-            csrfHash = newToken; // Update CSRF token
-        }
+            function updateCsrfToken(newToken) {
+                csrfHash = newToken; // Update CSRF token
+            }
 
-        $(".mark-read").click(function() {
-            let notificationId = $(this).data("id");
-            let button = $(this);
+            $(".mark-read").click(function() {
+                let notificationId = $(this).data("id");
+                let button = $(this);
 
-            $.ajax({
-                url: "<?= base_url('user/notification/mark-as-read'); ?>",
-                type: "POST",
-                data: {
-                    [csrfName]: csrfHash,
-                    id: notificationId
-                },
-                dataType: "json",
-                success: function(response) {
-                    if (response.success) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Marked as Read',
-                            text: 'Notification has been marked as read.',
-                            timer: 1500,
-                            showConfirmButton: false
-                        }).then(() => {
-                            button.closest('.notification-item').fadeOut();
-                        });
-
-                        // Update CSRF token
-                        updateCsrfToken(response.csrf_token);
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Failed',
-                            text: response.message
-                        });
-                    }
-                },
-                error: function() {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Something went wrong. Please try again later.'
-                    });
-                }
-            });
-        });
-
-        $("#markAllRead").click(function() {
-            Swal.fire({
-                title: "Mark All as Read?",
-                text: "This will mark all your notifications as read.",
-                icon: "question",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, Mark All"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: "<?= base_url('user/notification/mark-all-read') ?>",
-                        type: "POST",
-                        data: {
-                            [csrfName]: csrfHash
-                        },
-                        dataType: "json",
-                        success: function(response) {
-                            if (response.success) {
-                                Swal.fire({
-                                    icon: "success",
-                                    title: "Marked All as Read",
-                                    text: "All notifications have been updated.",
-                                    confirmButtonColor: "#3085d6"
-                                }).then(() => {
-                                    $(".notification-item").fadeOut();
-                                });
-
-                                // Update CSRF token
-                                updateCsrfToken(response.csrf_token);
-                            } else {
-                                Swal.fire({
-                                    icon: "error",
-                                    title: "Failed",
-                                    text: response.message
-                                });
-                            }
-                        },
-                        error: function() {
+                $.ajax({
+                    url: "<?= base_url('user/notification/mark-as-read'); ?>",
+                    type: "POST",
+                    data: {
+                        [csrfName]: csrfHash,
+                        id: notificationId
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.success) {
                             Swal.fire({
-                                icon: "error",
-                                title: "Error",
-                                text: "Something went wrong. Please try again."
+                                icon: 'success',
+                                title: 'Marked as Read',
+                                text: 'Notification has been marked as read.',
+                                timer: 1500,
+                                showConfirmButton: false
+                            }).then(() => {
+                                button.closest('.notification-item').fadeOut();
+                            });
+
+                            // Update CSRF token
+                            updateCsrfToken(response.csrf_token);
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Failed',
+                                text: response.message
                             });
                         }
-                    });
-                }
+                    },
+                    error: function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Something went wrong. Please try again later.'
+                        });
+                    }
+                });
+            });
+
+            $("#markAllRead").click(function() {
+                Swal.fire({
+                    title: "Mark All as Read?",
+                    text: "This will mark all your notifications as read.",
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, Mark All"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "<?= base_url('user/notification/mark-all-read') ?>",
+                            type: "POST",
+                            data: {
+                                [csrfName]: csrfHash
+                            },
+                            dataType: "json",
+                            success: function(response) {
+                                if (response.success) {
+                                    Swal.fire({
+                                        icon: "success",
+                                        title: "Marked All as Read",
+                                        text: "All notifications have been updated.",
+                                        confirmButtonColor: "#3085d6"
+                                    }).then(() => {
+                                        $(".notification-item").fadeOut();
+                                    });
+
+                                    // Update CSRF token
+                                    updateCsrfToken(response.csrf_token);
+                                } else {
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: "Failed",
+                                        text: response.message
+                                    });
+                                }
+                            },
+                            error: function() {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error",
+                                    text: "Something went wrong. Please try again."
+                                });
+                            }
+                        });
+                    }
+                });
             });
         });
-    });
-</script>
+    </script>
