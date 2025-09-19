@@ -796,22 +796,22 @@
         <div class="particle"></div>
         <div class="particle"></div>
     </div>
+    <!-- Main Container -->
     <div class="main-container">
         <div class="container-fluid">
             <!-- Header -->
             <div class="review-header">
-                <h1><i class="fas fa-file-signature me-3"></i>Academic Paper Review System</h1>
-                <div class="paper-info-grid">
-                    <div class="info-field">
-                        <label>Title of Paper Reviewed</label>
-                        <input type="text" value="<?= $rpi_info->rpi_title ?>" id="paperTitle">
+                <!-- Header Top Section -->
+                <div class="header-top">
+                    <div class="header-title">
+                        <div class="title-text">
+                            <h1>Academic Paper Review System</h1>
+                            <p>Title: <?= $rpi_info->rpi_title ?></p>
+                        </div>
                     </div>
-                    <!-- <div class="info-field">
-                        <label>Author's Name</label>
-                        <input type="text" placeholder="Enter author name..." id="authorName">
-                    </div> -->
                 </div>
             </div>
+
             <!-- Navigation Tabs -->
             <ul class="nav nav-tabs" id="reviewTabs" role="tablist">
                 <li class="nav-item" role="presentation">
@@ -867,374 +867,56 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="criterion-number">1</td>
-                                <td class="criterion-text">Relevance and significance of the research topic</td>
-                                <td>
-                                    <div class="score-selector">
-                                        <div class="score-dropdown">
-                                            <select name="score1" onchange="updateScoreVisual(this, 1)">
-                                                <option value="">Select Score...</option>
-                                                <optgroup label="📉 Poor (0-3)">
-                                                    <option value="0">0 - Completely inadequate</option>
-                                                    <option value="1">1 - Very poor</option>
-                                                    <option value="2">2 - Poor</option>
-                                                    <option value="3">3 - Below expectations</option>
-                                                </optgroup>
-                                                <optgroup label="📊 Fair (4-6)">
-                                                    <option value="4">4 - Somewhat below average</option>
-                                                    <option value="5">5 - Average</option>
-                                                    <option value="6">6 - Slightly above average</option>
-                                                </optgroup>
-                                                <optgroup label="📈 Good (7-8)">
-                                                    <option value="7">7 - Good</option>
-                                                    <option value="8">8 - Very good</option>
-                                                </optgroup>
-                                                <optgroup label="⭐ Very Good (9-10)">
-                                                    <option value="9">9 - Excellent</option>
-                                                    <option value="10">10 - Outstanding</option>
-                                                </optgroup>
-                                            </select>
+                            <?php $criterion_counter = 1;
+                            foreach ($mark_schema as $criterion) : ?>
+                                <tr>
+                                    <td class="criterion-number"><?= $criterion_counter; ?></td>
+                                    <td class="criterion-text"><?= $criterion->ec_text; ?></td>
+                                    <td>
+                                        <div class="score-selector">
+                                            <div class="score-dropdown">
+                                                <select name="score<?= $criterion_counter; ?>" onchange="updateScoreVisual(this, <?= $criterion_counter; ?>)">
+                                                    <option value="">Select Score...</option>
+                                                    <optgroup label="📉 Poor (0-3)">
+                                                        <option value="0">0 - Completely inadequate</option>
+                                                        <option value="1">1 - Very poor</option>
+                                                        <option value="2">2 - Poor</option>
+                                                        <option value="3">3 - Below expectations</option>
+                                                    </optgroup>
+                                                    <optgroup label="📊 Fair (4-6)">
+                                                        <option value="4">4 - Somewhat below average</option>
+                                                        <option value="5">5 - Average</option>
+                                                        <option value="6">6 - Slightly above average</option>
+                                                    </optgroup>
+                                                    <optgroup label="📈 Good (7-8)">
+                                                        <option value="7">7 - Good</option>
+                                                        <option value="8">8 - Very good</option>
+                                                    </optgroup>
+                                                    <optgroup label="⭐ Very Good (9-10)">
+                                                        <option value="9">9 - Excellent</option>
+                                                        <option value="10">10 - Outstanding</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                            <div class="score-visual" id="visual<?= $criterion_counter; ?>">
+                                                <div class="score-bar"></div>
+                                                <div class="score-bar"></div>
+                                                <div class="score-bar"></div>
+                                                <div class="score-bar"></div>
+                                                <div class="score-bar"></div>
+                                                <div class="score-bar"></div>
+                                                <div class="score-bar"></div>
+                                                <div class="score-bar"></div>
+                                                <div class="score-bar"></div>
+                                                <div class="score-bar"></div>
+                                                <span class="score-label" id="label<?= $criterion_counter; ?>">No score selected</span>
+                                            </div>
                                         </div>
-                                        <div class="score-visual" id="visual1">
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <span class="score-label" id="label3">No score selected</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td><textarea class="comment-box" placeholder="Enter your comments..."></textarea></td>
-                            </tr>
-                            <tr>
-                                <td class="criterion-number">4</td>
-                                <td class="criterion-text">Data collection and sampling procedures</td>
-                                <td>
-                                    <div class="score-selector">
-                                        <div class="score-dropdown">
-                                            <select name="score4" onchange="updateScoreVisual(this, 4)">
-                                                <option value="">Select Score...</option>
-                                                <optgroup label="📉 Poor (0-3)">
-                                                    <option value="0">0 - Completely inadequate</option>
-                                                    <option value="1">1 - Very poor</option>
-                                                    <option value="2">2 - Poor</option>
-                                                    <option value="3">3 - Below expectations</option>
-                                                </optgroup>
-                                                <optgroup label="📊 Fair (4-6)">
-                                                    <option value="4">4 - Somewhat below average</option>
-                                                    <option value="5">5 - Average</option>
-                                                    <option value="6">6 - Slightly above average</option>
-                                                </optgroup>
-                                                <optgroup label="📈 Good (7-8)">
-                                                    <option value="7">7 - Good</option>
-                                                    <option value="8">8 - Very good</option>
-                                                </optgroup>
-                                                <optgroup label="⭐ Very Good (9-10)">
-                                                    <option value="9">9 - Excellent</option>
-                                                    <option value="10">10 - Outstanding</option>
-                                                </optgroup>
-                                            </select>
-                                        </div>
-                                        <div class="score-visual" id="visual4">
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <span class="score-label" id="label4">No score selected</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td><textarea class="comment-box" placeholder="Enter your comments..."></textarea></td>
-                            </tr>
-                            <tr>
-                                <td class="criterion-number">5</td>
-                                <td class="criterion-text">Data analysis and interpretation</td>
-                                <td>
-                                    <div class="score-selector">
-                                        <div class="score-dropdown">
-                                            <select name="score5" onchange="updateScoreVisual(this, 5)">
-                                                <option value="">Select Score...</option>
-                                                <optgroup label="📉 Poor (0-3)">
-                                                    <option value="0">0 - Completely inadequate</option>
-                                                    <option value="1">1 - Very poor</option>
-                                                    <option value="2">2 - Poor</option>
-                                                    <option value="3">3 - Below expectations</option>
-                                                </optgroup>
-                                                <optgroup label="📊 Fair (4-6)">
-                                                    <option value="4">4 - Somewhat below average</option>
-                                                    <option value="5">5 - Average</option>
-                                                    <option value="6">6 - Slightly above average</option>
-                                                </optgroup>
-                                                <optgroup label="📈 Good (7-8)">
-                                                    <option value="7">7 - Good</option>
-                                                    <option value="8">8 - Very good</option>
-                                                </optgroup>
-                                                <optgroup label="⭐ Very Good (9-10)">
-                                                    <option value="9">9 - Excellent</option>
-                                                    <option value="10">10 - Outstanding</option>
-                                                </optgroup>
-                                            </select>
-                                        </div>
-                                        <div class="score-visual" id="visual5">
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <span class="score-label" id="label5">No score selected</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td><textarea class="comment-box" placeholder="Enter your comments..."></textarea></td>
-                            </tr>
-                            <tr>
-                                <td class="criterion-number">6</td>
-                                <td class="criterion-text">Results presentation and clarity</td>
-                                <td>
-                                    <div class="score-selector">
-                                        <div class="score-dropdown">
-                                            <select name="score6" onchange="updateScoreVisual(this, 6)">
-                                                <option value="">Select Score...</option>
-                                                <optgroup label="📉 Poor (0-3)">
-                                                    <option value="0">0 - Completely inadequate</option>
-                                                    <option value="1">1 - Very poor</option>
-                                                    <option value="2">2 - Poor</option>
-                                                    <option value="3">3 - Below expectations</option>
-                                                </optgroup>
-                                                <optgroup label="📊 Fair (4-6)">
-                                                    <option value="4">4 - Somewhat below average</option>
-                                                    <option value="5">5 - Average</option>
-                                                    <option value="6">6 - Slightly above average</option>
-                                                </optgroup>
-                                                <optgroup label="📈 Good (7-8)">
-                                                    <option value="7">7 - Good</option>
-                                                    <option value="8">8 - Very good</option>
-                                                </optgroup>
-                                                <optgroup label="⭐ Very Good (9-10)">
-                                                    <option value="9">9 - Excellent</option>
-                                                    <option value="10">10 - Outstanding</option>
-                                                </optgroup>
-                                            </select>
-                                        </div>
-                                        <div class="score-visual" id="visual6">
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <span class="score-label" id="label6">No score selected</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td><textarea class="comment-box" placeholder="Enter your comments..."></textarea></td>
-                            </tr>
-                            <tr>
-                                <td class="criterion-number">7</td>
-                                <td class="criterion-text">Discussion and implications</td>
-                                <td>
-                                    <div class="score-selector">
-                                        <div class="score-dropdown">
-                                            <select name="score7" onchange="updateScoreVisual(this, 7)">
-                                                <option value="">Select Score...</option>
-                                                <optgroup label="📉 Poor (0-3)">
-                                                    <option value="0">0 - Completely inadequate</option>
-                                                    <option value="1">1 - Very poor</option>
-                                                    <option value="2">2 - Poor</option>
-                                                    <option value="3">3 - Below expectations</option>
-                                                </optgroup>
-                                                <optgroup label="📊 Fair (4-6)">
-                                                    <option value="4">4 - Somewhat below average</option>
-                                                    <option value="5">5 - Average</option>
-                                                    <option value="6">6 - Slightly above average</option>
-                                                </optgroup>
-                                                <optgroup label="📈 Good (7-8)">
-                                                    <option value="7">7 - Good</option>
-                                                    <option value="8">8 - Very good</option>
-                                                </optgroup>
-                                                <optgroup label="⭐ Very Good (9-10)">
-                                                    <option value="9">9 - Excellent</option>
-                                                    <option value="10">10 - Outstanding</option>
-                                                </optgroup>
-                                            </select>
-                                        </div>
-                                        <div class="score-visual" id="visual7">
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <span class="score-label" id="label7">No score selected</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td><textarea class="comment-box" placeholder="Enter your comments..."></textarea></td>
-                            </tr>
-                            <tr>
-                                <td class="criterion-number">8</td>
-                                <td class="criterion-text">Conclusions and recommendations</td>
-                                <td>
-                                    <div class="score-selector">
-                                        <div class="score-dropdown">
-                                            <select name="score8" onchange="updateScoreVisual(this, 8)">
-                                                <option value="">Select Score...</option>
-                                                <optgroup label="📉 Poor (0-3)">
-                                                    <option value="0">0 - Completely inadequate</option>
-                                                    <option value="1">1 - Very poor</option>
-                                                    <option value="2">2 - Poor</option>
-                                                    <option value="3">3 - Below expectations</option>
-                                                </optgroup>
-                                                <optgroup label="📊 Fair (4-6)">
-                                                    <option value="4">4 - Somewhat below average</option>
-                                                    <option value="5">5 - Average</option>
-                                                    <option value="6">6 - Slightly above average</option>
-                                                </optgroup>
-                                                <optgroup label="📈 Good (7-8)">
-                                                    <option value="7">7 - Good</option>
-                                                    <option value="8">8 - Very good</option>
-                                                </optgroup>
-                                                <optgroup label="⭐ Very Good (9-10)">
-                                                    <option value="9">9 - Excellent</option>
-                                                    <option value="10">10 - Outstanding</option>
-                                                </optgroup>
-                                            </select>
-                                        </div>
-                                        <div class="score-visual" id="visual8">
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <span class="score-label" id="label8">No score selected</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td><textarea class="comment-box" placeholder="Enter your comments..."></textarea></td>
-                            </tr>
-                            <tr>
-                                <td class="criterion-number">9</td>
-                                <td class="criterion-text">Writing quality and organization</td>
-                                <td>
-                                    <div class="score-selector">
-                                        <div class="score-dropdown">
-                                            <select name="score9" onchange="updateScoreVisual(this, 9)">
-                                                <option value="">Select Score...</option>
-                                                <optgroup label="📉 Poor (0-3)">
-                                                    <option value="0">0 - Completely inadequate</option>
-                                                    <option value="1">1 - Very poor</option>
-                                                    <option value="2">2 - Poor</option>
-                                                    <option value="3">3 - Below expectations</option>
-                                                </optgroup>
-                                                <optgroup label="📊 Fair (4-6)">
-                                                    <option value="4">4 - Somewhat below average</option>
-                                                    <option value="5">5 - Average</option>
-                                                    <option value="6">6 - Slightly above average</option>
-                                                </optgroup>
-                                                <optgroup label="📈 Good (7-8)">
-                                                    <option value="7">7 - Good</option>
-                                                    <option value="8">8 - Very good</option>
-                                                </optgroup>
-                                                <optgroup label="⭐ Very Good (9-10)">
-                                                    <option value="9">9 - Excellent</option>
-                                                    <option value="10">10 - Outstanding</option>
-                                                </optgroup>
-                                            </select>
-                                        </div>
-                                        <div class="score-visual" id="visual9">
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <span class="score-label" id="label9">No score selected</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td><textarea class="comment-box" placeholder="Enter your comments..."></textarea></td>
-                            </tr>
-                            <tr>
-                                <td class="criterion-number">10</td>
-                                <td class="criterion-text">References and citation quality</td>
-                                <td>
-                                    <div class="score-selector">
-                                        <div class="score-dropdown">
-                                            <select name="score10" onchange="updateScoreVisual(this, 10)">
-                                                <option value="">Select Score...</option>
-                                                <optgroup label="📉 Poor (0-3)">
-                                                    <option value="0">0 - Completely inadequate</option>
-                                                    <option value="1">1 - Very poor</option>
-                                                    <option value="2">2 - Poor</option>
-                                                    <option value="3">3 - Below expectations</option>
-                                                </optgroup>
-                                                <optgroup label="📊 Fair (4-6)">
-                                                    <option value="4">4 - Somewhat below average</option>
-                                                    <option value="5">5 - Average</option>
-                                                    <option value="6">6 - Slightly above average</option>
-                                                </optgroup>
-                                                <optgroup label="📈 Good (7-8)">
-                                                    <option value="7">7 - Good</option>
-                                                    <option value="8">8 - Very good</option>
-                                                </optgroup>
-                                                <optgroup label="⭐ Very Good (9-10)">
-                                                    <option value="9">9 - Excellent</option>
-                                                    <option value="10">10 - Outstanding</option>
-                                                </optgroup>
-                                            </select>
-                                        </div>
-                                        <div class="score-visual" id="visual10">
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <div class="score-bar"></div>
-                                            <span class="score-label" id="label10">No score selected</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td><textarea class="comment-box" placeholder="Enter your comments..."></textarea></td>
-                            </tr>
+                                    </td>
+                                    <td><textarea class="comment-box" placeholder="Enter your comments..."></textarea></td>
+                                </tr>
+                                <?php $criterion_counter++; ?>
+                            <?php endforeach; ?>
                             <tr>
                                 <td colspan="3" class="total-score">Total Score</td>
                                 <td class="total-score" id="totalScore">0 / 100</td>
@@ -1405,8 +1087,9 @@
         function calculateTotal() {
             let total = 0;
             let count = 0;
+            const maxCriteria = <?= count($mark_schema); ?>;
 
-            for (let i = 1; i <= 10; i++) {
+            for (let i = 1; i <= maxCriteria; i++) {
                 const select = document.querySelector(`select[name="score${i}"]`);
                 if (select && select.value !== '') {
                     total += parseInt(select.value);
@@ -1414,7 +1097,8 @@
                 }
             }
 
-            document.getElementById('totalScore').textContent = `${total} / 100`;
+            const maxPossibleScore = maxCriteria * 10;
+            document.getElementById('totalScore').textContent = `${total} / ${maxPossibleScore}`;
         }
 
         // Form validation
@@ -1468,6 +1152,7 @@
 
         // Gather all form data
         function gatherFormData() {
+            const maxCriteria = <?= count($mark_schema); ?>;
             const data = {
                 paperTitle: document.getElementById('paperTitle').value,
                 authorName: document.getElementById('authorName').value,
@@ -1481,7 +1166,7 @@
             };
 
             // Collect scores and comments
-            for (let i = 1; i <= 10; i++) {
+            for (let i = 1; i <= maxCriteria; i++) {
                 const select = document.querySelector(`select[name="score${i}"]`);
                 if (select && select.value !== '') {
                     data.scores[`criterion${i}`] = parseInt(select.value);

@@ -104,6 +104,7 @@ class AdminParticipantController extends BaseController
             'judge_name'   => $judge_names,
         ];
 
+        dd($judges_list);
 
         return $this->render_user('participant/participant_abstract_review', $data);
     }

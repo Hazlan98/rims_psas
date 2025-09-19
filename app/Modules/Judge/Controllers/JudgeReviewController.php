@@ -11,6 +11,7 @@ use App\Models\RimsPaperRemark;
 use App\Models\RimsNotification;
 use App\Models\ResearchTeamModel;
 use App\Controllers\BaseController;
+use App\Models\EvaluationCriteriaModel;
 use App\Models\RimsPaperInformation;
 
 class JudgeReviewController extends BaseController
@@ -24,6 +25,7 @@ class JudgeReviewController extends BaseController
     protected $rims_notification;
     protected $rims_research_team;
     protected $rims_paper_remarks;
+    protected $evaluation_criteria;
 
     public function __construct()
     {
@@ -36,6 +38,7 @@ class JudgeReviewController extends BaseController
         $this->rims_notification        = new RimsNotification();
         $this->rims_research_team       = new ResearchTeamModel();
         $this->rims_paper_remarks       = new RimsPaperRemark();
+        $this->evaluation_criteria      = new EvaluationCriteriaModel();
     }
 
     public function updateReviewStatus()
@@ -96,7 +99,6 @@ class JudgeReviewController extends BaseController
     public function getReviewFullPaper($rpi_id)
     {
         $this->session->set('selected_rpi_id', $rpi_id);
-
         return redirect('judge/review/review-full-paper');
     }
     public function reviewFullPaper()
@@ -110,6 +112,9 @@ class JudgeReviewController extends BaseController
             ->where('rrt_rpi_id', $rpi_id)
             ->findAll();
 
+        // fetch marks schema
+        $mark_schema = $this->evaluation_criteria->findAll();
+
         // initialize
         $remarks = [];
         // check status
@@ -121,6 +126,7 @@ class JudgeReviewController extends BaseController
         // }
         $data = [
             'team_members'  => $team_members,
+            'mark_schema'   => $mark_schema,
             'rpi_info'      => $rpi_info,
             'remarks'       => $remarks,
         ];

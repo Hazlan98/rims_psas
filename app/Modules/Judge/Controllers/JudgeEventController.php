@@ -139,6 +139,7 @@ class JudgeEventController extends BaseController
             'event_info' => $event_info, // Now contains an array of events
         ];
 
+
         $this->render_user('event/assigned_event_list', $data);
     }
 }

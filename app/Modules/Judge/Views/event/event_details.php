@@ -780,16 +780,16 @@
                                                             <td>
                                                                 <?php if ($rpi->rpi_status == 'Awaiting Reviewer Acceptance'): ?>
                                                                     <div class="btn-group">
-                                                                        <button class="btn btn-success btn-sm accept-btn" data-id="<?= $rpi->rpi_id ?>">
+                                                                        <button class="btn btn-outline-primary btn-sm accept-btn" data-id="<?= $rpi->rpi_id ?>">
                                                                             <i class="fas fa-check"></i> Accept
                                                                         </button>
-                                                                        <button class="btn btn-danger btn-sm reject-btn" data-id="<?= $rpi->rpi_id ?>">
+                                                                        <button class="btn btn-outline-danger btn-sm reject-btn" data-id="<?= $rpi->rpi_id ?>">
                                                                             <i class="fas fa-times"></i> Reject
                                                                         </button>
                                                                     </div>
                                                                 <?php elseif ($rpi->rpi_status == 'Awaiting Review' || $rpi->rpi_status == 'Major Correction' || $rpi->rpi_status == 'Minor Correction' || $rpi->rpi_status == 'Correction Draft'): ?>
                                                                     <div class="btn-group">
-                                                                        <a href="<?= base_url('judge/review/get-review-full-paper/') . $rpi->rpi_id ?>" class="btn btn-info btn-sm view-btn">
+                                                                        <a href="<?= base_url('judge/review/get-review-full-paper/') . $rpi->rpi_id ?>" class="btn btn-outline-info btn-sm view-btn">
                                                                             <i class="fas fa-eye"></i>
                                                                         </a>
                                                                     </div>
@@ -859,7 +859,7 @@
                                                             <td><?= $counter++; ?></td>
                                                             <td><?= get_field_desc($rpi->rpi_rf_id); ?></td>
                                                             <td><?= $rpi->rpi_title ?></td>
-                                                            <td><a href="<?= base_url($rpi->rpi_abstract) ?>" class="btn btn-sm btn-info" target="_blank">abstract</a></td>
+                                                            <td><a href="<?= base_url($rpi->rpi_abstract) ?>" class="btn btn-sm btn-outline-info" target="_blank">abstract</a></td>
                                                             <td><?= get_rims_reviewer_status($rpi->rpi_status) ?></td>
                                                             <td>
                                                                 <?php if ($rpi->rpi_status == 'Awaiting Reviewer Acceptance'): ?>
@@ -873,7 +873,7 @@
                                                                     </div>
                                                                 <?php elseif ($rpi->rpi_status == 'Awaiting Review' || $rpi->rpi_status == 'Major Correction' || $rpi->rpi_status == 'Minor Correction' || $rpi->rpi_status == 'Correction Draft'): ?>
                                                                     <div class="btn-group">
-                                                                        <a href="<?= base_url('judge/review/get-review-full-paper/') . $rpi->rpi_id ?>" class="btn btn-info btn-sm view-btn">
+                                                                        <a href="<?= base_url('judge/review/get-review-full-paper/') . $rpi->rpi_id ?>" class="btn btn-outline-info btn-sm view-btn">
                                                                             <i class="fas fa-eye"></i>
                                                                         </a>
                                                                     </div>
